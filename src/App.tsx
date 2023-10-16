@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
+import sotaLogo from '/SoTA_textonly_logo.svg'
 import './App.css'
 
 function App() {
@@ -8,6 +9,13 @@ function App() {
 
   return (
     <>
+      <h1>Skill isuue? present</h1>
+      <div>
+        <a>
+          <img src={sotaLogo} className="logo" alt="SoTA logo" />
+        </a>
+      </div>
+      <h2>powered by</h2>
       <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
