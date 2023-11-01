@@ -1,15 +1,8 @@
 import React, { useState } from 'react';
 import type { MenuProps } from 'antd';
-import { Menu } from 'antd';
-import Logo from '/sotaTransparentBgLogo.svg';
+import { ConfigProvider, Menu, theme } from 'antd';
 
 const items: MenuProps['items'] = [
-    {
-        label: (
-        <a href='/' ><img src={Logo} alt='SoTA' /></a>
-        ),
-        key: 'home',
-    },
     {
         label: (<a href='/sports'>Sports</a>),
         key: 'sports',
@@ -25,11 +18,23 @@ const items: MenuProps['items'] = [
 ];
 
 const HeaderNavigation: React.FC = () => {
-    const [current, setCurrent] = useState('home');
+    const [current, setCurrent] = useState('sports');
     const onClick: MenuProps['onClick'] = (e) => {
         setCurrent(e.key);
-      };
-    return <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />;
+    };
+    return (
+        <ConfigProvider theme={{
+            token: {
+                colorPrimary: "#dba94d",
+                colorBgContainer: "#393F3F",
+                
+            },
+            algorithm: theme.darkAlgorithm,
+        }}>
+            <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} className="font-primary w-full text-2xl" />
+        </ConfigProvider>
+    )
 }
+
 
 export default HeaderNavigation;

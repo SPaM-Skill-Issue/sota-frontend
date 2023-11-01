@@ -1,8 +1,8 @@
 const Audience = () => {
   return (
     <div>
-      <h1>Audience</h1>
-      <p>This is the audience page</p>
+      <h1 class='font-primary text-white'>Audience</h1>
+      <p class='font-body text-white'>This is the audience page</p>
     </div>
   );
 }
