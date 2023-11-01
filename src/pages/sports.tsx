@@ -1,8 +1,8 @@
 const Sports = () => {
   return (
     <div>
-      <h1 class='font-primary text-white'>Sports</h1>
-      <p class='font-body text-white'>This is the sport page</p>
+      <h1 className='font-primary text-white'>Sports</h1>
+      <p className='font-body text-white'>This is the sport page</p>
     </div>
   );
 }
