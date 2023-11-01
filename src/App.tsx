@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Audience from './pages/Audience'
 import Sports from './pages/sports'
 import Medal from './pages/Medal'
+import Logo from '/sotaTransparentBgLogo.svg';
 
 const { Header, Content } = Layout;
 
@@ -23,8 +24,13 @@ function App() {
       algorithm: theme.darkAlgorithm,
     }}>
       <Layout>
-        <Header className=" bg-eeric-black-light">
-          <HeaderNavigation />
+        <Header className=" bg-eeric-black-light flex">
+          <div >
+            <img src="/sotaTransparentBgLogo.svg" alt="SoTA" className=" h-14 pt-3" />
+          </div>
+          <div class="w-full flex justify-center">
+            <HeaderNavigation />
+          </div>
         </Header>
         <Content>
           <BrowserRouter>

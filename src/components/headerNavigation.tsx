@@ -4,6 +4,10 @@ import { ConfigProvider, Menu, theme } from 'antd';
 
 const items: MenuProps['items'] = [
     {
+        label: (<a href='/'>Home</a>),
+        key: 'home',
+    },
+    {
         label: (<a href='/sports'>Sports</a>),
         key: 'sports',
     },
@@ -18,7 +22,7 @@ const items: MenuProps['items'] = [
 ];
 
 const HeaderNavigation: React.FC = () => {
-    const [current, setCurrent] = useState('sports');
+    const [current, setCurrent] = useState('home');
     const onClick: MenuProps['onClick'] = (e) => {
         setCurrent(e.key);
     };
@@ -31,7 +35,7 @@ const HeaderNavigation: React.FC = () => {
             },
             algorithm: theme.darkAlgorithm,
         }}>
-            <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} className="font-primary w-full text-2xl" />
+            <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} className="font-primary text-2xl" />
         </ConfigProvider>
     )
 }
