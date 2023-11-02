@@ -8,8 +8,10 @@ const Sports: React.FC = () => {
   };
 
   return (
-    <div className='flex justify-center'>
-      <SearchBar onSearch={handleSearch} placeHolder='Find a sport...'/>
+    <div className='w-full h-full'>
+      <div className='flex justify-center'>
+        <SearchBar onSearch={handleSearch} placeHolder='Find a sport...' />
+      </div>
     </div>
   );
 };
