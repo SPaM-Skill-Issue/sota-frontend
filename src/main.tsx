@@ -13,7 +13,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         colorSuccess: "#4c9f70",
         colorError: "#9b2915",
         colorBgBase: "#1b2021",
-        colorBgContainer: "#213555"
+        colorTextPlaceholder: "#fff",
+        fontSize: 20,
       },
       algorithm: theme.darkAlgorithm,
     }}>
