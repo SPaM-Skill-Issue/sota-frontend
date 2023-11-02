@@ -1,44 +1,48 @@
-import React, { useState } from 'react';
-import type { MenuProps } from 'antd';
+import React from 'react';
 import { ConfigProvider, Menu, theme } from 'antd';
+import { Link } from 'react-router-dom';
 
-const items: MenuProps['items'] = [
+const items = [
     {
-        label: (<a href='/'>Home</a>),
+        label: 'Home',
         key: 'home',
+        path: '/',
     },
     {
-        label: (<a href='/sports'>Sports</a>),
-        key: 'sports',
-    },
-    {
-        label: (<a href='/medal'>Medal</a>),
-        key: 'medal',
-    },
-    {
-        label: (<a href='/audience'>Audience</a>),
+        label: 'Audience',
         key: 'audience',
+        path: '/audience',
+    },
+    {
+        label: 'Sports',
+        key: 'sports',
+        path: '/sports',
+    },
+    {
+        label: 'Medal',
+        key: 'medal',
+        path: '/medal',
     },
 ];
 
 const HeaderNavigation: React.FC = () => {
-    const [current, setCurrent] = useState('home');
-    const onClick: MenuProps['onClick'] = (e) => {
-        setCurrent(e.key);
-    };
     return (
         <ConfigProvider theme={{
             token: {
                 colorPrimary: "#dba94d",
                 colorBgContainer: "#393F3F",
-                
             },
             algorithm: theme.darkAlgorithm,
         }}>
-            <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} className="font-primary text-2xl" />
+            <Menu defaultSelectedKeys={['home']} mode="horizontal" className="bg-eeric-black-light w-fit font-primary text-xl">
+                {items.map((item) => (
+                    <Menu.Item key={item.key} className="text-white">
+                        <Link to={item.path}>{item.label}</Link>
+                    </Menu.Item>
+                ))}
+            </Menu>
         </ConfigProvider>
     )
 }
-
 
 export default HeaderNavigation;
