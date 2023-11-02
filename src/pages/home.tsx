@@ -1,3 +1,4 @@
+import MostInterestSports from '../components/mostInterestSports';
 import OverallMedal from '../components/overallMedal';
 
 const Home = () => {
@@ -6,8 +7,8 @@ const Home = () => {
       <div className="">
         <OverallMedal />
       </div>
-      <div>
-        
+      <div className='mt-5'>
+        <MostInterestSports />
       </div>
     </div>
   );
