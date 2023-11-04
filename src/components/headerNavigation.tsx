@@ -9,11 +9,6 @@ const items = [
         path: '/',
     },
     {
-        label: 'Audience',
-        key: 'audience',
-        path: '/audience',
-    },
-    {
         label: 'Sports',
         key: 'sports',
         path: '/sports',
@@ -22,6 +17,11 @@ const items = [
         label: 'Medal',
         key: 'medal',
         path: '/medal',
+    },
+    {
+        label: 'Audience',
+        key: 'audience',
+        path: '/audience',
     },
 ];
 

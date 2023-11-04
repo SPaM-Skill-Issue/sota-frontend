@@ -21,7 +21,7 @@ function App() {
             </div>
           </Header>
           <Content>
-            <div className="mt-10 mx-24">
+            <div className="my-10 mx-16">
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/audience" element={<Audience />} />

@@ -32,7 +32,7 @@ const countryItems = [
     },
 ];
 
-const FilterComponent: React.FC = () => {
+const FilterSportCountry: React.FC = () => {
     const [selectedCategory, setSelectedCategory] = useState<string>('sports'); // Set "sports" as default
     const [data, setData] = useState(sportItems); // Set "sportItems" as default
 
@@ -58,4 +58,4 @@ const FilterComponent: React.FC = () => {
     );
 };
 
-export default FilterComponent;
+export default FilterSportCountry;

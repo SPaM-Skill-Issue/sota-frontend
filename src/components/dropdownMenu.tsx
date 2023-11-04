@@ -14,7 +14,7 @@ const handleSelect = (value: string) => {
 const DropdownMenu: React.FC<DropdownMenuProps> = ({ data }) => {
 
   return (
-    <Select onSelect={handleSelect} className=' w-1/4' >
+    <Select onSelect={handleSelect} className='w-1/3' >
       {data.map(item => (
         <Option key={item.key} value={item.key}>
           {item.label}
