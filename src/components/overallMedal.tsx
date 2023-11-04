@@ -2,12 +2,18 @@ import MedalCountTable from "./medalCountTable";
 import PieChartComponent from "./pieChart";
 import { ArrowRightOutlined } from '@ant-design/icons';
 
+const data = [
+    { type: 'Glod', value: 27 },
+    { type: 'Silver', value: 25 },
+    { type: 'Bronze', value: 18 },
+];
+
 const OverallMedal = () => {
     return (
         <div className="flex-row bg-belft-blue rounded-3xl">
             <div className="flex w-full p-5">
                 <div>
-                    <PieChartComponent />
+                    <PieChartComponent data={data} />
                 </div>
                 <div className="w-full">
                     <div className=" flex justify-end">

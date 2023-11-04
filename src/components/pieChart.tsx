@@ -1,16 +1,18 @@
 import React from 'react';
 import { Pie } from '@ant-design/plots';
 
-const PieChartComponent: React.FC = () => {
-  const data = [
-    { type: 'Glod', value: 27 },
-    { type: 'Silver', value: 25 },
-    { type: 'Bronze', value: 18 },
-  ];
+interface PieChartComponentProps {
+  data: {
+    type: string;
+    value: number;
+  }[];
+}
+
+const PieChartComponent: React.FC<PieChartComponentProps> = ({ data }) => {
 
   const config = {
     appendPadding: 10,
-    data,
+    data: data,
     angleField: 'value',
     colorField: 'type',
     radius: 0.8,
