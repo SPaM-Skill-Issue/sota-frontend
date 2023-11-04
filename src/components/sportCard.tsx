@@ -7,10 +7,10 @@ interface SportCardProps {
 const SportCard: React.FC<SportCardProps> = ({ sportName, sportIcon, color }) => {
     return (
         <div className="flex-row w-fit">
-            <div style={{fill: color, width: 160}} className="flex justify-center">
+            <div style={{ fill: color, width: 160 }} className="flex justify-center">
                 {sportIcon}
             </div>
-            <div style={{color: color}} className="flex justify-center font-body text-xl">
+            <div style={{ color: color }} className="flex justify-center font-body text-xl">
                 {sportName}
             </div>
         </div>

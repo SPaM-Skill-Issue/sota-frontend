@@ -33,9 +33,9 @@ const MostInterestSports = () => {
                     <span className="font-primary text-hunyadi-yellow text-3xl">Top 5 sports with the most interest</span>
                 </div>
                 <div className="flex justify-evenly w-full py-8">
-                    { topFiveSports.map((sport, index) => (
-                            <SportCard key={index} sportName={sport.sportName} sportIcon={sport.sportIcon} color='#4C9F70' />
-                        ))
+                    {topFiveSports.map((sport, index) => (
+                        <SportCard key={index} sportName={sport.sportName} sportIcon={sport.sportIcon} color='#4C9F70' />
+                    ))
                     }
                 </div>
             </div>

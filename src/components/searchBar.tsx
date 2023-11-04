@@ -16,7 +16,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, placeHolder }) => {
             token: {
                 colorBgContainer: "#949896",
             }
-          }}>
+        }}>
             <Input.Search
                 placeholder={placeHolder}
                 onSearch={handleSearch}

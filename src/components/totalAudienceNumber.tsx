@@ -21,15 +21,15 @@ const TotalAudienceNumber = () => {
             <div className=" p-5">
                 <span className=" font-primary text-2xl text-white">Total Number of Audient</span>
                 <div className="flex justify-center py-5">
-                    <span className=" text-hunyadi-yellow text-3xl">{ data.total } <TeamOutlined /></span>
+                    <span className=" text-hunyadi-yellow text-3xl">{data.total} <TeamOutlined /></span>
                 </div>
                 <div>
                     <div className="flex justify-center">
-                        <span className="text-white"><ManOutlined /> { data.man }</span>
+                        <span className="text-white"><ManOutlined /> {data.man}</span>
                         <span className="text-white ml-5"><WomanOutlined /> {data.woman}</span>
                     </div>
                     <div className="flex justify-center">
-                        <span className="text-white"><ManOutlined /> { data.noneDefine }</span>
+                        <span className="text-white"><ManOutlined /> {data.noneDefine}</span>
                     </div>
                 </div>
             </div>

@@ -3,7 +3,10 @@ import { Select } from 'antd';
 const { Option } = Select;
 
 interface DropdownMenuProps {
-    data: Array<{ label: string; key: string }>;
+    data: {
+        label: string;
+        key: string
+    }[];
 }
 
 const handleSelect = (value: string) => {
