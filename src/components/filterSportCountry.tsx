@@ -1,25 +1,49 @@
 import React, { useState } from 'react';
 import { Radio, RadioChangeEvent } from 'antd';
-import SearchBar from '../components/searchBar';
+import DropdownMenu from './dropdownMenu';
+
+const sportItems = [
+    {
+        label: "Archery",
+        key: '1',
+    },
+    {
+        label: "Artistic Gymnastics",
+        key: '2',
+    },
+    {
+        label: 'Artistic Swimming',
+        key: '3',
+    },
+];
+
+const countryItems = [
+    {
+        label: 'Korea',
+        key: 'KR',
+    },
+    {
+        label: 'Thailand',
+        key: 'TH',
+    },
+    {
+        label: 'Japan',
+        key: 'JP',
+    },
+];
 
 const FilterComponent: React.FC = () => {
     const [selectedCategory, setSelectedCategory] = useState<string>('sports'); // Set "sports" as default
-    const [placeholderText, setPlaceholderText] = useState<string>('Search sports...'); // Set default placeholder
+    const [data, setData] = useState(sportItems); // Set "sportItems" as default
 
     const handleCategoryChange = (e: RadioChangeEvent) => {
         const selectedValue = e.target.value;
         setSelectedCategory(selectedValue);
-
         if (selectedValue === 'sports') {
-            setPlaceholderText('Search sports...');
-        } else if (selectedValue === 'country') {
-            setPlaceholderText('Search countries...');
+            setData(sportItems);
+        } else {
+            setData(countryItems);
         }
-    };
-
-    const handleSearch = (value: string) => {
-        console.log(`Searching for: ${value}`);
-        // TODO: search logic 
     };
 
     return (
@@ -29,7 +53,7 @@ const FilterComponent: React.FC = () => {
                 <Radio value="sports">Sports</Radio>
                 <Radio value="country">Country</Radio>
             </Radio.Group>
-            <SearchBar onSearch={handleSearch} placeHolder={placeholderText} />
+            <DropdownMenu data={data} />
         </div>
     );
 };
