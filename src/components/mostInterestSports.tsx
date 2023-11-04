@@ -1,5 +1,5 @@
 import { ArrowRightOutlined } from "@ant-design/icons";
-import SportsIcons from "../assets/sportsIcons";
+import SportsIcons from "./sportsIcons";
 import SportCard from "./sportCard";
 
 const topFiveSports = [
@@ -40,7 +40,7 @@ const MostInterestSports = () => {
                 </div>
             </div>
             <div className="flex w-full justify-end pb-5 pr-5 text-white">
-                <a href="/medal">Overall audience page<ArrowRightOutlined /></a>
+                <a href="/medal">Overall audience page <ArrowRightOutlined /></a>
             </div>
         </div>
     )
