@@ -1,27 +1,27 @@
 import { ArrowRightOutlined } from "@ant-design/icons";
-import { Archery, ArtisticGymnastics } from "../assets/sportsPictogram";
+import SportsIcons from "../assets/sportsIcons";
 import SportCard from "./sportCard";
 
 const topFiveSports = [
     {
         sportName: "Archery",
-        sportIcon: <Archery />
+        sportIcon: <SportsIcons sportId={1} />
     },
     {
         sportName: "Artistic Gymnastics",
-        sportIcon: <ArtisticGymnastics />
+        sportIcon: <SportsIcons sportId={2} />
+    },
+    {
+        sportName: "Artistic Swimming",
+        sportIcon: <SportsIcons sportId={3} />
     },
     {
         sportName: "Athletics",
-        sportIcon: <Archery />
+        sportIcon: <SportsIcons sportId={4} />
     },
     {
         sportName: "Badminton",
-        sportIcon: <ArtisticGymnastics />
-    },
-    {
-        sportName: "Baseball",
-        sportIcon: <Archery />
+        sportIcon: <SportsIcons sportId={5} />
     }
 ];
 
