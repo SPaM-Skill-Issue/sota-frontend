@@ -10,7 +10,7 @@ const SportCard: React.FC<SportCardProps> = ({ sportName, sportIcon, color }) =>
             <div style={{ fill: color, width: 160 }} className="flex justify-center">
                 {sportIcon}
             </div>
-            <div style={{ color: color }} className="flex justify-center font-body text-xl">
+            <div style={{ color: color }} className="flex justify-center font-body text-xl mb-5">
                 {sportName}
             </div>
         </div>
