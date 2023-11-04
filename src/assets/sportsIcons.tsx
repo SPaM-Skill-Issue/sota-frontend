@@ -4,14 +4,20 @@ interface SportsIconsProps {
     sportId: number;
 }
 
+interface SportsData {
+    sport_id: number;
+    sport_name: string;
+    sport_icon: string[];
+}
+
 const SportsIcons: React.FC<SportsIconsProps> = ({ sportId }) => {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<SportsData[]>([]);
 
     useEffect(() => {
         const fetchSportsIcons = async () => {
             try {
                 const response = await fetch('src/assets/sportsIconsData.json');
-                const sportsData = await response.json();
+                const sportsData = await response.json() as SportsData[];
                 const filteredData = sportsData.filter((sport) => sport.sport_id === sportId);
                 setData(filteredData);
             } catch (error) {
