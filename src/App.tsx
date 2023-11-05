@@ -5,6 +5,7 @@ import Home from './pages/home'
 import Audience from './pages/audience'
 import Sports from './pages/sports'
 import Medal from './pages/medal'
+import SportDetail from "./pages/sportDetail";
 
 const { Header, Content } = Layout;
 
@@ -27,6 +28,7 @@ function App() {
                             <Route path="/audience" element={<Audience />} />
                             <Route path="/sports" element={<Sports />} />
                             <Route path="/medal" element={<Medal />} />
+                            <Route path="/sports/:id" element={<SportDetail />} />
                         </Routes>
                     </div>
                 </Content>
