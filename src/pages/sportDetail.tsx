@@ -62,7 +62,7 @@ const SportsDetail = () => {
         <div>
             <div className='flex bg-belft-blue rounded-2xl'>
                 {sport ? (
-                    <div className='p-5'>
+                    <div className='p-5 text-white font-primary'>
                         <div>Sport Name: {sport.name}</div>
                     </div>
                 ) : (
