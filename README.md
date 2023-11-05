@@ -21,3 +21,10 @@ Now you can use this command to run
 ```
 npm run dev
 ```
+
+## How to run ESlint?
+If you have implemented any of the code, you should run 
+```
+npm run lint
+```
+to ensure that your written code is well-formatted and does not break any ESlint format.
