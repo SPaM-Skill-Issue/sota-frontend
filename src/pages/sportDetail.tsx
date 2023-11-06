@@ -52,27 +52,27 @@ const SportsDetail = () => {
                                 </div>
                             </div>
                             <div className="row-span-2 col-span-7">
-                                <div className="text-center text-hunyadi-yellow font-bold text-5xl h-full flex items-center justify-center">
+                                <div className="font-primary text-center text-hunyadi-yellow font-bold text-6xl h-full flex items-center justify-center">
                                     <h1>{sport.sport_name}</h1>
                                 </div>
                             </div>
                             {/* Summary section */}
                             <div className="row-span-4 col-span-7 space-y-4">
-                                <div className='text-white text-3xl'>
+                                <div className='font-primary text-white text-3xl'>
                                     <h2>Summary</h2>
                                 </div>
 
-                                <div className="block px-6 py-4 w-full h-48 text-xl rounded-lg border bg-belft-blue-light border-gray-600 text-white overflow-y-auto">
+                                <div className="font-body block px-6 py-4 w-full h-48 text-xl rounded-lg border bg-belft-blue-light border-gray-600 text-white overflow-y-auto">
                                     <p className='indent-10'>{sport.sport_summary}</p>
                                 </div>
                             </div>
 
                             {/* Sport types section */}
                             <div className='row-span-4 col-span-4 space-y-4 mr-12'>
-                                <div className='text-white text-3xl'>
+                                <div className='font-primary text-white text-3xl'>
                                     <h2>Sport types</h2>
                                 </div>
-                                <div className="block p-2.5 w-full h-48 text-xl rounded-lg border bg-belft-blue-light border-gray-600 text-white overflow-y-auto">
+                                <div className="font-body block p-2.5 w-full h-48 text-xl rounded-lg border bg-belft-blue-light border-gray-600 text-white overflow-y-auto">
                                     <ul className="list-disc pl-5 space-y-2">
                                         {sport.sport_types.map((type, index) => (
                                             <li key={index}>{type.type_name}</li>
@@ -82,7 +82,7 @@ const SportsDetail = () => {
                             </div>
                             {/* Participating Countries section */}
                             <div className='row-span-4 col-span-6 space-y-4'>
-                                <div className='text-white text-3xl'>
+                                <div className='font-primary text-white text-3xl'>
                                     <h2>Participating Countries</h2>
                                 </div>
                                 <div className='h-48 rounded-lg border bg-belft-blue-light border-gray-600 overflow-y-auto'>
