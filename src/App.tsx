@@ -1,43 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import sotaLogo from '/sotaTextOnlyLogo.svg'
-import './App.css'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Layout } from "antd";
+import HeaderNavigation from './components/headerNavigation';
+import Home from './pages/home'
+import Audience from './pages/audience'
+import Sports from './pages/sports'
+import Medal from './pages/medal'
+import SportDetail from "./pages/sportDetail";
+
+const { Header, Content } = Layout;
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <h1>Skill isuue? present</h1>
-      <div>
-        <a>
-          <img src={sotaLogo} className="logo" alt="SoTA logo" />
-        </a>
-      </div>
-      <h2>powered by</h2>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    return (
+        <BrowserRouter>
+            <Layout>
+                <Header className=" bg-eeric-black-light flex">
+                    <div >
+                        <img src="/sotaTransparentBgLogo.svg" alt="SoTA" className=" h-14 pt-3" />
+                    </div>
+                    <div className="w-full flex justify-center">
+                        <HeaderNavigation />
+                    </div>
+                </Header>
+                <Content>
+                    <div className="my-10 mx-16">
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/audience" element={<Audience />} />
+                            <Route path="/sports" element={<Sports />} />
+                            <Route path="/medal" element={<Medal />} />
+                            <Route path="/sports/:id" element={<SportDetail />} />
+                        </Routes>
+                    </div>
+                </Content>
+            </Layout>
+        </BrowserRouter>
+    )
 }
 
 export default App
