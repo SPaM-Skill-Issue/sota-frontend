@@ -27,23 +27,22 @@ const SportsDetail = () => {
             if (Object.keys(data).length !== 0) {
                 setSport(data);
             } else {
-                setSport(null);
+                navigate(`/sports/1`)
             }
         } catch (error) {
             console.error("Error fetching sport data: ", error);
-            setSport(null)
+            navigate(`/sports/1`);
         } finally {
             setLoading(false);
         }
-
     };
 
     useEffect(() => {
         if (id) { fetchSport(id); }
         else {
-            setLoading(false)
+            navigate(`/sports/1`);
         }
-    }, [id]);
+    }, [id, navigate]);
 
     const goToNextPage = () => {
         const nextPage = parseInt(id!, 10) + 1;
@@ -59,13 +58,12 @@ const SportsDetail = () => {
         <div>
             {loading ? (
                 <div className="flex items-center justify-center w-screen h-[75vh]">
-                    {/* Spin component from Ant Design */}
                     <Spin size="large" />
                 </div>
             ) : (
                 <div>
                     <div className='flex bg-belft-blue rounded-2xl'>
-                        {sport ? (
+                        {sport && (
                             <div className="container mx-auto px-4 pt-4 pb-8">
                                 <div className="grid grid-rows-10 grid-cols-10">
                                     <div className="row-span-6 col-span-3 flex justify-center items-center">
@@ -125,33 +123,7 @@ const SportsDetail = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        ) : (
-                            <div className="
-                        flex
-                        items-center
-                        justify-center
-                        w-screen
-                        h-[75vh]
-                        bg-belft-blue
-                        from-indigo-600
-                        to-blue-400
-                        rounded-2xl
-                    "
-                            >
-                                {/* Sport Not Found section */}
-                                <div className="px-32 py-20 bg-belft-blue-light rounded-md shadow-xl">
-                                    <div className="flex flex-col items-center">
-                                        <h1 className="mb-4 text-5xl font-bold text-center text-hunyadi-yellow">
-                                            <span className="text-rufous-red">Oops!</span> Sport id <span className="text-rufous-red">{id}</span> not found
-                                        </h1>
-                                        <p className="mb-8 text-center text-white">
-                                            The sport you’re looking for doesn’t exist.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
+                            </div>)}
                     </div>
                     <div className='flex pt-3 w-full'>
                         <div className='flex justify-start w-1/2 text-white'>
@@ -160,7 +132,7 @@ const SportsDetail = () => {
                         <div className='flex justify-end w-1/2 text-white space-x-8'>
                             {Number(id) > 1 && (
                                 <a onClick={goToPreviousPage}>
-                                     <ArrowLeftOutlined /> Previous sport details
+                                    <ArrowLeftOutlined /> Previous sport details
                                 </a>
                             )}
                             <a onClick={goToNextPage}>Next sport details <ArrowRightOutlined /></a>
