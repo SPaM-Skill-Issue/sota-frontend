@@ -38,21 +38,16 @@ const SportsDetail = () => {
     };
 
     useEffect(() => {
-        if (Number(id) > 0 && id) { fetchSport(id); }
+        if (id && parseInt(id, 10)) {
+            fetchSport(id);
+        }
         else {
             navigate(`/sports/1`);
         }
     }, [id, navigate]);
 
-    const goToNextPage = () => {
-        const nextPage = parseInt(id!, 10) + 1;
-        navigate(`/sports/${nextPage}`);
-    };
-
-    const goToPreviousPage = () => {
-        const previousPage = parseInt(id!, 10) - 1;
-        navigate(`/sports/${previousPage}`);
-    };
+    const navigateToSportPageByOffset = (offset: number) =>
+        navigate(`/sports/${parseInt(id!, 10) + offset}`)
 
     return (
         <div>
@@ -131,11 +126,11 @@ const SportsDetail = () => {
                         </div>
                         <div className='flex justify-end w-1/2 text-white space-x-8'>
                             {Number(id) > 1 && (
-                                <a onClick={goToPreviousPage}>
+                                <a onClick={() => navigateToSportPageByOffset(-1)}>
                                     <ArrowLeftOutlined /> Previous sport details
                                 </a>
                             )}
-                            <a onClick={goToNextPage}>Next sport details <ArrowRightOutlined /></a>
+                            <a onClick={() => navigateToSportPageByOffset(1)}>Next sport details <ArrowRightOutlined /></a>
                         </div>
                     </div>
                 </div>
