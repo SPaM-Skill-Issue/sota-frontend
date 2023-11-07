@@ -1,6 +1,9 @@
 import { Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 
+
+import MedalIcon from './medalIcon';
+
 interface DataType {
     key: number;
     rank?: number;
@@ -75,7 +78,19 @@ const data: DataType[] = [
 ];
 
 const MedalCountTable = () => {
-    return <Table columns={columns} dataSource={data} />
+    return (
+    <Table dataSource={data}>
+        <Table.Column key="gold" dataIndex="gold" title={
+            <MedalIcon place={1} size={24} fill="#D6AF36"/>
+        }/>
+        <Table.Column key="silver" dataIndex="silver" title={
+            <MedalIcon place={2} size={24} fill="#A7A7AD"/>
+        }/>
+        <Table.Column key="bronze" dataIndex="bronze" title={
+            <MedalIcon place={3} size={24} fill="#824A02"/>
+        }/>
+    </Table>
+    )
 }
 
 export default MedalCountTable;
