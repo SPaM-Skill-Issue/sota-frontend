@@ -1,5 +1,3 @@
-import { SportsIconsProps } from '../components/sportsIcons';
-
 export interface SportType {
   type_id: number; // Assuming the type details include an ID
   type_name: string; // And any other relevant properties
