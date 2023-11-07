@@ -47,15 +47,19 @@ const Sports: React.FC = () => {
             <div className='flex justify-center'>
                 <SearchBar onSearch={handleSearch} placeHolder='Find a sport...' />
             </div>
-            <div className='scrollable-container mt-10 overflow-y-auto h-[70vh]'> 
+            <div className='scrollable-container mt-10 overflow-y-auto h-[70vh]'>
                 <div className='flex flex-wrap justify-evenly'>
                     {filteredSportsIcons.map((icon) => (
-                        <div key={icon.sportId} className='flex justify-center bg-belft-blue w-1/6 rounded-2xl m-3'>
+                        <div
+                            key={icon.sportId}
+                            className='flex justify-center bg-belft-blue w-1/6 rounded-2xl m-3 hover:opacity-75 transition-all duration-300 transform hover:scale-105 active:scale-95'
+                        >
                             <Link to={`/sports/${icon.sportId}`}>
                                 <SportCard sportName={icon.sportName} sportIcon={icon.sportIcon} color='#4C9F70' />
                             </Link>
                         </div>
                     ))}
+
                 </div>
             </div>
         </div>
