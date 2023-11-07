@@ -51,8 +51,8 @@ const SportsDetail = () => {
     };
 
     const goToPreviousPage = () => {
-        const nextPage = parseInt(id!, 10) - 1;
-        navigate(`/sports/${nextPage}`);
+        const previousPage = parseInt(id!, 10) - 1;
+        navigate(`/sports/${previousPage}`);
     };
 
     return (
@@ -158,7 +158,11 @@ const SportsDetail = () => {
                             <a href='/sports'><RollbackOutlined /> Back to all sports list</a>
                         </div>
                         <div className='flex justify-end w-1/2 text-white space-x-8'>
-                            <a onClick={goToPreviousPage}> <ArrowLeftOutlined /> Previous sport details</a>
+                            {Number(id) > 1 && (
+                                <a onClick={goToPreviousPage}>
+                                     <ArrowLeftOutlined /> Previous sport details
+                                </a>
+                            )}
                             <a onClick={goToNextPage}>Next sport details <ArrowRightOutlined /></a>
                         </div>
                     </div>
