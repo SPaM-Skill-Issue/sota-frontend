@@ -20,6 +20,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, placeHolder }) => {
             <Input.Search
                 placeholder={placeHolder}
                 onSearch={handleSearch}
+                onChange={(e) => {handleSearch(e.target.value)}}
                 enterButton
                 className='w-1/2 font-body text-white'
             />

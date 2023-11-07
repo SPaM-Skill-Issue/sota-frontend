@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-interface SportsIconsProps {
+export interface SportsIconsProps {
     sportId: number;
 }
 
