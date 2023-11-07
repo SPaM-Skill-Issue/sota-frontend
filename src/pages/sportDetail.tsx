@@ -38,7 +38,7 @@ const SportsDetail = () => {
     };
 
     useEffect(() => {
-        if (id) { fetchSport(id); }
+        if (Number(id) > 0 && id) { fetchSport(id); }
         else {
             navigate(`/sports/1`);
         }
