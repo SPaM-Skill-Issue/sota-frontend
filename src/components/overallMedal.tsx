@@ -1,6 +1,6 @@
-import MedalCountTable from "./medalCountTable";
 import PieChartComponent from "./pieChart";
 import { ArrowRightOutlined } from '@ant-design/icons';
+import MedalTable from "./tables/medalByCountry";
 
 const data = [
     { type: 'Glod', value: 27 },
@@ -20,7 +20,8 @@ const OverallMedal = () => {
                         <span className="font-primary text-hunyadi-yellow text-3xl">Overall Medal Count</span>
                     </div>
                     <div>
-                        <MedalCountTable />
+                        {/* Medal table */}
+                        <MedalTable />
                     </div>
                 </div>
             </div>
