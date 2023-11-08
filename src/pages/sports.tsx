@@ -58,7 +58,7 @@ const Sports: React.FC = () => {
                 </div>
             ) : (
                 <div className='scrollable-container mt-10 overflow-y-auto h-[70vh]'>
-                    <div className='flex flex-wrap justify-evenly'>
+                    <div className='flex flex-wrap justify-center'>
                         {filteredSportsIcons.map((icon) => (
                             <div
                                 key={icon.sportId}
