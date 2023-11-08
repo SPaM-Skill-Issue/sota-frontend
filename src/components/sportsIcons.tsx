@@ -16,7 +16,7 @@ const SportsIcons: React.FC<SportsIconsProps> = ({ sportId }) => {
     useEffect(() => {
         const fetchSportsIcons = async () => {
             try {
-                const response = await fetch('src/assets/sportsIconsData.json');
+                const response = await fetch('/src/assets/sportsIconsData.json');
                 const sportsData = await response.json() as SportsData[];
                 const filteredData = sportsData.filter((sport) => sport.sport_id === sportId);
                 setData(filteredData);
