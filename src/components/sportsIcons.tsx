@@ -31,7 +31,9 @@ const SportsIcons: React.FC<SportsIconsProps> = ({ sportId }) => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 504 504" xmlSpace="preserve">
             {data.map((sport) => (
-                <path key={sport.sport_id} d={sport.sport_icon[0]} />
+                sport.sport_icon.map((icon) => (
+                    <path d={icon} />
+                ))
             ))}
         </svg>
     );
