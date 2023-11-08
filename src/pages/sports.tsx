@@ -58,11 +58,11 @@ const Sports: React.FC = () => {
                 </div>
             ) : (
                 <div className='scrollable-container mt-10 overflow-y-auto h-[70vh]'>
-                    <div className='flex flex-wrap justify-center'>
+                    <div className='grid grid-cols-5 justify-evenly'>
                         {filteredSportsIcons.map((icon) => (
                             <div
                                 key={icon.sportId}
-                                className='flex justify-center bg-belft-blue w-1/6 rounded-2xl m-3 hover:opacity-75 transition-all duration-300 transform hover:scale-105 active:scale-95'
+                                className='flex justify-center bg-belft-blue w-11/12 rounded-2xl m-3 hover:opacity-75 transition-all duration-300 transform hover:scale-105 active:scale-95'
                             >
                                 <Link to={`/sports/${icon.sportId}`}>
                                     <SportCard sportName={icon.sportName} sportIcon={icon.sportIcon} color='#4C9F70' />
