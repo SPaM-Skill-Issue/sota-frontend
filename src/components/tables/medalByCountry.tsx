@@ -61,13 +61,13 @@ const opts: SotaTableProps<CountryEntry> = {
             }
             prev = e;
         });
-        return result.slice(0, 3);
+        return result.slice(0, 10);
     },
     columns: [
         (<Table.Column key="rank" dataIndex="rank"
         className="before:content-['#'] before:font-bold before:font-primary font-bold font-primary" width={60}/>),
         (<Table.Column key="country" dataIndex="country" render={(c: string) => (
-            <Tooltip className="font-body" title={getCountryName(c)} placement="left">
+            <Tooltip className="font-primary" title={getCountryName(c)} placement="left">
             <ReactCountryFlag countryCode={c} svg style={{ marginRight: '1rem', width: '1.5rem', height: '1.5rem' }}/>
             {getCountryName(c)}
             </Tooltip>
