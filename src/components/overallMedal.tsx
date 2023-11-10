@@ -1,4 +1,5 @@
 import PieChartComponent from "./pieChart";
+import { ConfigProvider } from "antd";
 import { ArrowRightOutlined } from '@ant-design/icons';
 import MedalTable from "./tables/medalByCountry";
 
@@ -19,9 +20,25 @@ const OverallMedal = () => {
                     <div className=" flex justify-end">
                         <span className="font-primary text-hunyadi-yellow text-3xl">Overall Medal Count</span>
                     </div>
-                    <div>
-                        {/* Medal table */}
+                    <div className="pt-6">
+                    <ConfigProvider
+                        theme = {{
+                            components: {
+                                Table: {
+                                    headerBg: "rgba(0, 0, 0, 0)",
+                                    headerSplitColor: "rgba(0, 0, 0, 0)",
+                                    borderColor: "rgba(0, 0, 0, 0)"
+                                },
+                            },
+                            token: {
+                                colorBgContainer: "rgba(0, 0, 0, 0)",
+                                colorFillAlter: "#3E586C",
+                                fontFamily: "'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'"
+                            }
+                        }}
+                    >
                         <MedalTable />
+                    </ConfigProvider>
                     </div>
                 </div>
             </div>
