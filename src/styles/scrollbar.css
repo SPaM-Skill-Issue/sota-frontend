@@ -1,23 +1,28 @@
 /* For Webkit browsers */
-.h-48::-webkit-scrollbar {
-    width: 20px; /* width of the entire scrollbar */
-  }
-  
-  .h-48::-webkit-scrollbar-track {
-    background: transparent
-  }
-  
-  .h-48::-webkit-scrollbar-thumb {
-    background-color: #393F3F; /* color of the scroll thumb */
-    border-radius: 30px; /* roundness of the scroll thumb */
-    border: 6px solid transparent; /* creates padding around scroll thumb */
-    background-clip: padding-box; /* This ensures the background (the thumb) doesn't bleed into the border */
-}
-  
-  /* For Firefox */
-  .h-48 {
-    scrollbar-width: 20px; /* or "auto" or "thin" */
-    scrollbar-color: #393F3F transparent; /* thumb and track color */
+.scrollable-container::-webkit-scrollbar {
+  width: 20px;
+  /* width of the entire scrollbar */
 }
 
-  
+.scrollable-container::-webkit-scrollbar-track {
+  background: transparent
+}
+
+.scrollable-container::-webkit-scrollbar-thumb {
+  background-color: #393F3F;
+  /* color of the scroll thumb */
+  border-radius: 30px;
+  /* roundness of the scroll thumb */
+  border: 6px solid transparent;
+  /* creates padding around scroll thumb */
+  background-clip: padding-box;
+  /* This ensures the background (the thumb) doesn't bleed into the border */
+}
+
+/* For Firefox */
+.scrollable-container {
+  scrollbar-width: 20px;
+  /* or "auto" or "thin" */
+  scrollbar-color: #393F3F transparent;
+  /* thumb and track color */
+}

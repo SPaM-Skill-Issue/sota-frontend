@@ -11,3 +11,9 @@ export interface Sport {
   participating_countries: string[];
   sport_types: SportType[]; // Array of SportType, assuming each type has its own set of properties
 }
+
+export interface SportDataIcon {
+  sportId: number;
+  sportName: string;
+  sportIcon: JSX.Element;
+}
