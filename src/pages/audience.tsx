@@ -14,14 +14,8 @@ const audienceAgeData = [
 ];
 
 const audienceGraphData = {
-    xFeild: 'sport',
-    yFeild: 'number of people',
-    data: [
-        { sport: 'Golf', value: 100 },
-        { sport: 'Volleyball', value: 120 },
-        { sport: 'Football', value: 90 },
-        { sport: 'Archery', value: 150 },
-    ]
+    topic: "country",
+    filter: "TH"
 }
 
 
@@ -48,7 +42,7 @@ const Audience = () => {
                         <div className="pt-5">
                             <span className="text-white flex justify-center">Graph show numbers of people in country that interested in each sports</span>
                             <div className=" pt-5">
-                                <BarChart xFeild={ audienceGraphData.xFeild } yFeild={ audienceGraphData.yFeild } data={ audienceGraphData.data } />
+                                <BarChart topic={ audienceGraphData.topic } filter={ audienceGraphData.filter }/>
                             </div>
                         </div>
                     </div>
