@@ -23,9 +23,9 @@ const Medal = () => {
             const res = await fetch(`https://sota-backend.fly.dev/medals`);
             const data = await res.json();
             let k: keyof typeof data;
-            var gold = 0;
-            var silver = 0;
-            var bronze = 0;
+            let gold = 0;
+            let silver = 0;
+            let bronze = 0;
             for (k in data) {
                 gold = gold + data[k].gold;
                 silver = silver + data[k].silver;
