@@ -2,12 +2,8 @@ import { ConfigProvider } from "antd";
 import FilterSportCountry from "../components/filterSportCountry";
 import PieChartComponent from "../components/pieChart";
 import OverallMedalByCountry from "../components/tables/medalByCountry";
-
-const medalData = [
-    { type: 'Glod', value: 27 },
-    { type: 'Silver', value: 25 },
-    { type: 'Bronze', value: 18 },
-];
+import { useEffect, useState } from 'react';
+import { MedalTypeCount } from '../interfaces/medal'
 
 const sportOrCountryData = [
     { type: 'Football', value: 27 },
@@ -18,7 +14,38 @@ const sportOrCountryData = [
 ];
 
 const Medal = () => {
-    return (
+    const [medalData, setMedal] = useState<MedalTypeCount | null>();
+    const [load, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchMedal = async () => {
+        try {
+            const res = await fetch(`https://sota-backend.fly.dev/medals`);
+            const data = await res.json();
+            let k: keyof typeof data;
+            var gold = 0;
+            var silver = 0;
+            var bronze = 0;
+            for (k in data) {
+                gold = gold + data[k].gold;
+                silver = silver + data[k].silver;
+                bronze = bronze + data[k].bronze;
+            }
+            const medalNew = [
+                {type: 'gold', value: gold},
+                {type: 'silver', value: silver},
+                {type: 'bronze', value: bronze}
+            ];
+            setMedal(medalNew);
+        } catch (error) {
+            console.error("Error fetching overall medal data of every sport: ", error);
+        } finally {
+            setLoading(false);
+        }};
+        fetchMedal();
+    }, []);
+
+    return !load && (
         <div className="flex">
             <div className="w-1/3 overflow-auto">
                 <ConfigProvider theme={{
