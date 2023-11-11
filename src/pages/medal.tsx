@@ -1,5 +1,7 @@
+import { ConfigProvider } from "antd";
 import FilterSportCountry from "../components/filterSportCountry";
 import PieChartComponent from "../components/pieChart";
+import OverallMedalByCountry from "../components/tables/medalByCountry";
 
 const medalData = [
     { type: 'Glod', value: 27 },
@@ -19,7 +21,22 @@ const Medal = () => {
     return (
         <div className="flex">
             <div className="w-1/3 overflow-auto">
-                {/* TODO: Add overall medal table component */}
+                <ConfigProvider theme={{
+                    components: {
+                        Table: {
+                            headerSplitColor: "rgba(0, 0, 0, 0)",
+                            borderColor: "rgba(0, 0, 0, 0)",
+                            headerBg: "#213555",
+                        },
+                    },
+                    token: {
+                        fontSize: 16,
+                        colorFillAlter: "#3E586C",
+                        colorBgContainer: "#213555"
+                    },
+                }}>
+                <OverallMedalByCountry />
+                </ConfigProvider>
             </div>
             <div className="w-2/3 ml-4">
                 <FilterSportCountry />

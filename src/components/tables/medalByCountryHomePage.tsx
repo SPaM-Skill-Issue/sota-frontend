@@ -1,9 +1,10 @@
 import { Table, Tooltip } from "antd";
-import { CountryEntry, MedalObject } from "../../interfaces/table";
-import { SotaTable, SotaTableProps, TableRow } from "../tableComponent";
-import { getCountryName } from "../../util/iso31661a2";
-import MedalIcon from "../medalIcon";
 import ReactCountryFlag from "react-country-flag";
+import { SotaTable, SotaTableProps, TableRow } from "../tableComponent";
+import { CountryEntry, MedalObject } from "../../interfaces/table";
+import MedalIcon from "../medalIcon";
+import { getCountryName } from "../../util/iso31661a2";
+
 
 const opts: SotaTableProps<CountryEntry> = {
     src: "https://sota-backend.fly.dev/medals",
@@ -47,46 +48,45 @@ const opts: SotaTableProps<CountryEntry> = {
             }
             prev = e;
         });
-        return result;
+        return result.slice(0, 3);
     },
     columns: [
-        (<Table.Column key="rank" dataIndex="rank" width={45} className="before:content-['#'] before:font-bold before:font-primary font-bold font-primary" />),
+        (<Table.Column key="rank" dataIndex="rank"
+        className="before:content-['#'] before:font-bold before:font-primary font-bold font-primary" width={60}/>),
         (<Table.Column key="country" dataIndex="country" render={(c: string) => (
-            <Tooltip className="font-primary" title={getCountryName(c)} placement="right">
-                <ReactCountryFlag countryCode={c} svg style={{ marginRight: '0.5rem', width: '1.5rem', height: '1.5rem' }} />
-                {c}
+            <Tooltip className="font-primary" title={getCountryName(c)} placement="left">
+            <ReactCountryFlag countryCode={c} svg style={{ marginRight: '1rem', width: '1.5rem', height: '1.5rem' }}/>
+            {getCountryName(c)}
             </Tooltip>
-        )} />),
+        )} ellipsis={true} className="font-primary font-bold" />),
         (<Table.Column key="total" dataIndex="total" render={(t: number) => (
-            <span className="text-shamrock-green font-bold">{t}</span>
-        )} title={(
-            <span className="text-shamrock-green font-primary font-bold">Total</span>
-        )} align="center" />),
+            <span className="font-bold">{t}</span>
+        )} title={
+            <span className="font-bold font-primary">Total</span>
+        } align="center" />),
         (<Table.Column key="gold" dataIndex="gold" title={
             <div className="flex w-full justify-center content-center">
-                <MedalIcon place={1} size={28} fill="#D6AF36"/>
+                <MedalIcon place={1} size={32} fill="#D6AF36"/>
             </div>
         } align="center" />),
         (<Table.Column key="silver" dataIndex="silver" title={
             <div className="flex w-full justify-center content-center">
-                <MedalIcon place={2} size={28} fill="#A7A7AD"/>
+                <MedalIcon place={2} size={32} fill="#A7A7AD"/>
             </div>
         } align="center" />),
         (<Table.Column key="bronze" dataIndex="bronze" title={
             <div className="flex w-full justify-center content-center">
-                <MedalIcon place={3} size={28} fill="#CC7B12"/>
+                <MedalIcon place={3} size={32} fill="#CC7B12"/>
             </div>
         } align="center" />),
     ],
     tableProps: {
         size: "small",
         tableLayout: "fixed",
-        pagination: {
-            position: [ "topRight" ]
-        }
+        pagination: false
     }
-}
+};
 
-const OverallMedalByCountry: React.FC = () => ( <SotaTable {...opts} /> );
+const OverallMedalByCountryHomePage: React.FC = () => ( <SotaTable {...opts} /> );
 
-export default OverallMedalByCountry;
+export default OverallMedalByCountryHomePage;

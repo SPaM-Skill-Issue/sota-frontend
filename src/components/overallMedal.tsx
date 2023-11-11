@@ -1,7 +1,7 @@
 import PieChartComponent from "./pieChart";
 import { ConfigProvider } from "antd";
 import { ArrowRightOutlined } from '@ant-design/icons';
-import MedalTable from "./tables/medalByCountry";
+import MedalTable from "./tables/medalByCountryHomePage";
 
 const data = [
     { type: 'Glod', value: 27 },
