@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const items = [
     {
@@ -26,8 +26,11 @@ const items = [
 ];
 
 const HeaderNavigation: React.FC = () => {
+    const location = useLocation();
+    const activeKey = items.find(item => location.pathname.includes(item.key))?.key || "home";
+
     return (
-        <Menu defaultSelectedKeys={['home']} mode="horizontal" className="bg-eeric-black-light w-fit font-primary text-xl">
+        <Menu selectedKeys={[activeKey]} mode="horizontal" className="bg-eeric-black-light w-fit font-primary text-xl">
             {items.map((item) => (
                 <Menu.Item key={item.key} className="text-white">
                     <Link to={item.path}>{item.label}</Link>
