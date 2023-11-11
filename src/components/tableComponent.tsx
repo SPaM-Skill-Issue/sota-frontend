@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { Table, TableProps } from 'antd';
 
 import React, { useEffect, useState } from 'react';
-import Axios, { AxiosResponse } from 'axios';
 
 type ColumnType = React.ReactElement<typeof Table.Column>;
 
@@ -16,27 +17,28 @@ export interface SotaTableProps<T> {
     refreshRate?: number;
     tableProps?: Omit<TableProps<T>, "dataSource" | "loading">;
     dataProcess: DataProcessor<T>;
-};
+}
 
 const SotaTable: React.FC<Partial<SotaTableProps<any>>> = (props) => {
     
     const [ isLoaded, setLoaded ] = useState<boolean>(false);
     const [ data, setData ] = useState<TableRow<any>[]>([]);
 
-    const fetchData = async (): Promise<AxiosResponse> => {
-        const res = await Axios.get(props.src!);
-        return res
+    const fetchData = async (): Promise<any> => {
+        const res = await fetch(props.src!);
+        const j = await res.json();
+        return j;
     }
 
     const update = () => {
         fetchData().then((res) => {
-            let rawData = res.data;
-            const finalData: TableRow<any>[] = props.dataProcess!.apply(null, [rawData]);
-            setData(finalData);
-            (finalData.length != 0 && !isLoaded) ? setLoaded(true) : false;
+            const data: TableRow<any>[] = props.dataProcess!.apply(null, [res]);
+            setData(data);
+            (data.length != 0 && !isLoaded) ? setLoaded(true) : false;
         });
     }
 
+    /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
         setLoaded(false);
         update();
@@ -45,6 +47,7 @@ const SotaTable: React.FC<Partial<SotaTableProps<any>>> = (props) => {
         }, props.refreshRate!*1000);
         return () => clearInterval(interval);
     }, []);
+    /* eslint-enable */
 
     return (
         <Table dataSource={data} loading={!isLoaded} {...props.tableProps}>

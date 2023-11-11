@@ -9,7 +9,7 @@ import { getCountryName } from "../../util/iso31661a2";
 const opts: SotaTableProps<CountryEntry> = {
     src: "https://sota-backend.fly.dev/medals",
     dataProcess: (data): TableRow<CountryEntry>[] => {
-        let result: TableRow<CountryEntry>[] = [];
+        const result: TableRow<CountryEntry>[] = [];
         for (const [country, medals] of Object.entries<MedalObject>(data)) {
             const total = medals.gold + medals.silver + medals.bronze;
             result.push({

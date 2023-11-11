@@ -5,7 +5,7 @@ export interface CountryEntry {
     gold: number;
     silver: number;
     bronze: number;
-};
+}
 
 export interface SportEntry {
     rank: number;
@@ -29,4 +29,4 @@ export interface MedalObject {
     gold: number;
     silver: number;
     bronze: number;
-};
+}
