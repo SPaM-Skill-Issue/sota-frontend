@@ -19,25 +19,25 @@ const SportsDetail = () => {
     const [sport, setSport] = useState<Sport | null>();
     const [loading, setLoading] = useState(true);
 
-    const fetchSport = async (sportId: string) => {
-        setLoading(true);
-        try {
-            const res = await fetch(`https://sota-backend.fly.dev/sport/${sportId}`);
-            const data: Sport = await res.json();
-            if (Object.keys(data).length !== 0) {
-                setSport(data);
-            } else {
-                navigate(`/sports/1`)
-            }
-        } catch (error) {
-            console.error("Error fetching sport data: ", error);
-            navigate(`/sports/1`);
-        } finally {
-            setLoading(false);
-        }
-    };
-
     useEffect(() => {
+        const fetchSport = async (sportId: string) => {
+            setLoading(true);
+            try {
+                const res = await fetch(`https://sota-backend.fly.dev/sport/${sportId}`);
+                const data: Sport = await res.json();
+                if (Object.keys(data).length !== 0) {
+                    setSport(data);
+                } else {
+                    navigate(`/sports/1`)
+                }
+            } catch (error) {
+                console.error("Error fetching sport data: ", error);
+                navigate(`/sports/1`);
+            } finally {
+                setLoading(false);
+            }
+        };
+
         if (id && parseInt(id, 10)) {
             fetchSport(id);
         }
