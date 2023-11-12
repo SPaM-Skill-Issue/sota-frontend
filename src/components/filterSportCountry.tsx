@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Radio, RadioChangeEvent } from 'antd';
 import DropdownMenu from './dropdownMenu';
 import { getCountryName } from '../util/iso31661a2';
@@ -56,10 +56,12 @@ const FilterSportCountry: React.FC<sendData> = (sendData) => {
         setDropDown("1");
     }, []);
 
+    /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
         sendData.dataHandle(dropdowndata);
         sendData.catagoryHandle(selectedCategory);
     }, [dropdowndata]);
+     /* eslint-enable */
 
     const handleCategoryChange = async (e: RadioChangeEvent) => {
         const selectedValue = e.target.value;
