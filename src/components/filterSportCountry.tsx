@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Radio, RadioChangeEvent } from 'antd';
 import DropdownMenu from './dropdownMenu';
 import { getCountryName } from '../util/iso31661a2';
@@ -8,9 +8,15 @@ interface Entry {
     key: string;
 }
 
-const FilterSportCountry: React.FC = () => {
+interface sendData {
+    dataHandle: (value: string) => void;
+    catagoryHandle: (value: string) => void;
+}
+
+const FilterSportCountry: React.FC<sendData> = (sendData) => {
     const [selectedCategory, setSelectedCategory] = useState<string>('sports'); // Set "sports" as default
     const [data, setData] = useState<Entry[]>([]); // Set "sportItems" as default
+    const [dropdowndata, setDropDown] = useState<string>('');
 
     const getCountryCode = async () => {
         try {
@@ -46,17 +52,31 @@ const FilterSportCountry: React.FC = () => {
         }
     }
     useEffect(() => {
-        getSportCode()
+        getSportCode();
+        setDropDown("1");
     }, []);
+
+    useEffect(() => {
+        sendData.dataHandle(dropdowndata);
+        sendData.catagoryHandle(selectedCategory);
+    }, [dropdowndata]);
 
     const handleCategoryChange = async (e: RadioChangeEvent) => {
         const selectedValue = e.target.value;
         setSelectedCategory(selectedValue);
         if (selectedValue === 'sports') {
             await getSportCode();
+            setDropDown("1");
         } else {
             await getCountryCode();
+            setDropDown("AR");
         }
+    };
+
+    const handleSelect = (value: string) => {
+        console.log(`Selected: ${value}`);
+        // Do something with the selected value here
+        setDropDown(value);
     };
 
     return (
@@ -66,7 +86,7 @@ const FilterSportCountry: React.FC = () => {
                 <Radio value="sports">Sports</Radio>
                 <Radio value="country">Country</Radio>
             </Radio.Group>
-            <DropdownMenu data={data} />
+            <DropdownMenu data={data} handleSelect={handleSelect} />
         </div>
     );
 };

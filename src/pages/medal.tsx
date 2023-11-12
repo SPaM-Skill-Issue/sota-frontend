@@ -2,6 +2,7 @@ import { ConfigProvider } from "antd";
 import FilterSportCountry from "../components/filterSportCountry";
 import PieChartComponent from "../components/pieChart";
 import OverallMedalByCountry from "../components/tables/medalByCountry";
+import { useState } from "react";
 
 const medalData = [
     { type: 'Glod', value: 27 },
@@ -18,6 +19,8 @@ const sportOrCountryData = [
 ];
 
 const Medal = () => {
+    const [ filterKey, setFilterKey ] = useState<string>('');
+    const [ filterCatagory, setCatagory ] = useState<string>('');
     return (
         <div className="flex">
             <div className="w-1/3 overflow-auto">
@@ -39,7 +42,7 @@ const Medal = () => {
                 </ConfigProvider>
             </div>
             <div className="w-2/3 ml-4">
-                <FilterSportCountry />
+                <FilterSportCountry dataHandle={setFilterKey} catagoryHandle={setCatagory}/>
                 <div className="flex justify-evenly h-fit">
                     <div className="w-1/3">
                         <PieChartComponent data={medalData} />

@@ -7,14 +7,10 @@ interface DropdownMenuProps {
         label: string;
         key: string
     }[];
+    handleSelect: (value:string) => void;
 }
 
-const handleSelect = (value: string) => {
-    console.log(`Selected: ${value}`);
-    // Do something with the selected value here
-};
-
-const DropdownMenu: React.FC<DropdownMenuProps> = ({ data }) => {
+const DropdownMenu: React.FC<DropdownMenuProps> = ({ data, handleSelect }) => {
 
     return (
         <Select onSelect={handleSelect} className='w-1/3' >
