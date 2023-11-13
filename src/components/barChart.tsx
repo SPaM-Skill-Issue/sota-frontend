@@ -1,7 +1,9 @@
 import { Column } from '@ant-design/plots';
+import { Spin } from 'antd';
 import { useEffect, useState } from 'react';
 import { Audience, GenderValue, ResultForCountry, ResultForSport } from '../interfaces/audienceBarChart';
-
+import { getSportName } from '../util/sportid';
+import { getCountryName } from '../util/iso31661a2';
 
 interface BarChartProps {
     topic: string;
@@ -14,16 +16,25 @@ const BarChart: React.FC<BarChartProps> = ({ topic, filter }) => {
     const [xFeild, setxField] = useState<string>('');
     const [data, setData] = useState<GenderValue[]>([]);
 
+    function checkGender(gender: string) {
+        if(gender == "M"){
+            return "Male";
+        } else if (gender == "F"){
+            return "Female";
+        }
+        return "Non defined"
+    }
+
     function countBy(list: Audience[]) {
-        if (topic == "sport") {
+        if (topic == "sports") {
             setxField("country")
             const result: ResultForSport[] = [];
             list.forEach((item) => {
                 if (item.sport_id.includes(Number(filter))) {
                     if ((result.filter((result_item) => result_item.country == item.country_code && result_item.gender == item.gender)).length == 0) {
                         const data: ResultForSport = {
-                            country: item.country_code,
-                            gender: item.gender,
+                            country: getCountryName(item.country_code),
+                            gender: checkGender(item.gender),
                             value: 1
                         };
                         result.push(data);
@@ -43,8 +54,8 @@ const BarChart: React.FC<BarChartProps> = ({ topic, filter }) => {
                     item.sport_id.forEach((id) => {
                         if ((result.filter((result_item) => result_item.sport == String(id) && result_item.gender == item.gender)).length == 0) {
                             const data: ResultForCountry = {
-                                sport: String(id),
-                                gender: item.gender,
+                                sport: getSportName(String(id)),
+                                gender: checkGender(item.gender),
                                 value: 1
                             };
                             result.push(data);
@@ -64,9 +75,10 @@ const BarChart: React.FC<BarChartProps> = ({ topic, filter }) => {
         const fetchData = async () => {
             setLoaded(true);
             try {
-                const res = await fetch("https://sota-backend.fly.dev/audient");
-                const j = await res.json();
-                countBy(j);
+                const res_a = await fetch("https://sota-backend.fly.dev/audient");
+                const audience_json = await res_a.json();
+                countBy(audience_json);
+
             } catch (error) {
                 console.error("Error fetching data: ", error);
             } finally {
@@ -74,7 +86,7 @@ const BarChart: React.FC<BarChartProps> = ({ topic, filter }) => {
             }
         };
         fetchData();
-    }, []);
+    }, [topic, filter]);
 
     const config = {
         data,
@@ -84,7 +96,11 @@ const BarChart: React.FC<BarChartProps> = ({ topic, filter }) => {
         isGroup: true,
     }
 
-    return <Column {...config} />;
+    return isLoaded ? (
+        <div className="flex items-center justify-center w-screen h-[75vh]">
+            <Spin size="large" />
+        </div>
+    ) : <Column {...config} />;
 };
 
 export default BarChart;
