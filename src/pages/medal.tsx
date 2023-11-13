@@ -3,49 +3,67 @@ import FilterSportCountry from "../components/filterSportCountry";
 import PieChartComponent from "../components/pieChart";
 import OverallMedalByCountry from "../components/tables/medalByCountry";
 import { useEffect, useState } from 'react';
-import { MedalTypeCount } from '../interfaces/medal'
+import { MedalTypeCount, MedalBySportCountry, MedalByKey } from '../interfaces/medal'
+import SportCard from "../components/sportCard";
 
-const sportOrCountryData = [
-    { type: 'Football', value: 27 },
-    { type: 'Golf', value: 25 },
-    { type: 'Archery', value: 18 },
-    { type: 'Volleyball', value: 10 },
-    { type: 'Swimming', value: 3 },
-];
 
 const Medal = () => {
     const [ filterKey, setFilterKey ] = useState<string>('');
     const [ filterCatagory, setCatagory ] = useState<string>('');
-    const [medalData, setMedal] = useState<MedalTypeCount | null>();
+    const [ medalData, setMedal ] = useState<MedalTypeCount | null>();
+    const [ sportOrCountryData, setSportOrCountryData ] = useState<MedalBySportCountry | null>();
     const [load, setLoading] = useState(true);
+
+    const mockData = [{}];
 
     useEffect(() => {
         const fetchMedal = async () => {
         try {
-            const res = await fetch(`https://sota-backend.fly.dev/medals`);
-            const data = await res.json();
-            let k: keyof typeof data;
-            let gold = 0;
-            let silver = 0;
-            let bronze = 0;
-            for (k in data) {
-                gold = gold + data[k].gold;
-                silver = silver + data[k].silver;
-                bronze = bronze + data[k].bronze;
+            if(filterCatagory == '' || filterKey == '') {
+                setMedal(mockData);
+                setSportOrCountryData(mockData);
+                return;
             }
+            const res = await fetch(`https://sota-backend.fly.dev/medal/${filterCatagory.charAt(0).toLowerCase()}/${filterKey}`);
+            const data = await res.json();
+
+            console.log(data);
+
             const medalNew = [
-                {type: 'gold', value: gold},
-                {type: 'silver', value: silver},
-                {type: 'bronze', value: bronze}
+                {type: 'gold', value: data['gold']},
+                {type: 'silver', value: data['silver']},
+                {type: 'bronze', value: data['bronze']}
             ];
             setMedal(medalNew);
+            
+            let sportOrCountryNew: Record<string, number>[] = [];
+            
+            for(var val of data['individual_countries']) {
+                sportOrCountryNew.push({ type: val[filterCatagory == 'sports' ? 'country_name' : 'sport_name'], value: val['bronze'] + val['silver'] + val['gold']});
+            }
+
+            let itemsToSort = Object.keys(sportOrCountryNew).map(
+                (key) => { return [key, sportOrCountryNew[key]] }
+            );
+            itemsToSort.sort(
+                (first, second) => { return second[1]['value'] - first[1]['value'] }
+            );
+
+            const sortedSportOrCountry = itemsToSort.slice(0, 5);
+            
+            let sportOrCountryResult: Record<string, number>[] = [];
+            sortedSportOrCountry.forEach((sorted) => { sportOrCountryResult.push({ type: sorted[1]['type'], value: sorted[1]['value']}) });
+
+            setSportOrCountryData(sportOrCountryResult);
+
+            
         } catch (error) {
             console.error("Error fetching overall medal data of every sport: ", error);
         } finally {
             setLoading(false);
         }};
         fetchMedal();
-    }, []);
+    }, [filterCatagory, filterKey]);
 
     return !load && (
         <div className="flex">

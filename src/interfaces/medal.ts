@@ -3,3 +3,7 @@ export interface MedalTypeCount {
     silver: number;
     bronze: number;
 }
+
+export interface MedalBySportCountry {
+    [type: string]: number;
+}
