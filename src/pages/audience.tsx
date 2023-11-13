@@ -3,6 +3,11 @@ import FilterComponent from "../components/filterSportCountry";
 import PieChartComponent from "../components/pieChart";
 import TotalAudienceNumber from "../components/totalAudienceNumber";
 import { useState } from "react";
+import ReactCountryFlag from "react-country-flag";
+import SportsIcons from "../components/sportsIcons";
+import { getSportName } from '../util/sportid';
+import { getCountryName } from '../util/iso31661a2';
+
 
 const audienceAgeData = [
     { type: '< 18', value: 27 },
@@ -14,17 +19,6 @@ const audienceAgeData = [
 
 ];
 
-const audienceGraphData = {
-    xFeild: 'sport',
-    yFeild: 'number of people',
-    data: [
-        { sport: 'Golf', value: 100 },
-        { sport: 'Volleyball', value: 120 },
-        { sport: 'Football', value: 90 },
-        { sport: 'Archery', value: 150 },
-    ]
-}
-
 
 
 const Audience = () => {
@@ -32,7 +26,7 @@ const Audience = () => {
     const [ filterCatagory, setCatagory] = useState<string>('');
     return (
         <div>
-            <div className="felx">
+            <div>
                 <FilterComponent dataHandle={setFilterKey} catagoryHandle={setCatagory} />
             </div>
             <div className="flex pt-10">
@@ -47,11 +41,37 @@ const Audience = () => {
                 </div>
                 <div className="ml-5 bg-belft-blue rounded-2xl w-full">
                     <div className="p-5">
-                        <span className="font-primary text-2xl text-white">Country or Sport name</span>
-                        <div className="pt-5">
-                            <span className="text-white flex justify-center">Graph show numbers of people in country that interested in each sports</span>
+                        {filterCatagory == "sports" ? 
+                        (<div className="flex">
+                            <div style={{ fill: "#DBA94D", width: 60 }} className="flex justify-center mr-2">
+                                <SportsIcons sportId={Number(filterKey)} />
+                            </div>
+                            <div style={{ color: "#DBA94D" }} className="flex justify-center mb-5 mt-5">
+                                <span className="font-primary text-3xl">{getSportName(filterKey)}</span>
+                            </div>
+                        </div>) 
+                        : 
+                        (<div className="flex">
+                            <div style={{ width: 60 }} className="flex justify-center mr-2">
+                                <ReactCountryFlag
+                                    className='mx-3 mt-3 flex justify-center items-center'
+                                    countryCode={filterKey}
+                                    svg
+                                    style={{
+                                        width: '2.5em',
+                                        height: '2.5em',
+                                    }}
+                                    title={filterKey}
+                                />
+                            </div>
+                            <div style={{ color: "#DBA94D" }} className="flex justify-center mb-5 mt-5">
+                                <span className="font-primary text-3xl">{getCountryName(filterKey)}</span>
+                            </div>
+                        </div>)}
+                        <div className='pt-5'>
+                            <span className="font-primary text-white flex justify-center">Graph show numbers of people in {filterCatagory == "country" ? getCountryName(filterKey) :"each country" } that interested in {filterCatagory == "sports" ? getSportName(filterKey) :"each sports" }</span>
                             <div className=" pt-5">
-                                <BarChart xFeild={ audienceGraphData.xFeild } yFeild={ audienceGraphData.yFeild } data={ audienceGraphData.data } />
+                                <BarChart topic={ filterCatagory } filter={ filterKey }/>
                             </div>
                         </div>
                     </div>
