@@ -14,6 +14,8 @@ const sportOrCountryData = [
 ];
 
 const Medal = () => {
+    const [ filterKey, setFilterKey ] = useState<string>('');
+    const [ filterCatagory, setCatagory ] = useState<string>('');
     const [medalData, setMedal] = useState<MedalTypeCount | null>();
     const [load, setLoading] = useState(true);
 
@@ -66,7 +68,7 @@ const Medal = () => {
                 </ConfigProvider>
             </div>
             <div className="w-2/3 ml-4">
-                <FilterSportCountry />
+                <FilterSportCountry dataHandle={setFilterKey} catagoryHandle={setCatagory}/>
                 <div className="flex justify-evenly h-fit">
                     <div className="w-1/3">
                         <PieChartComponent data={medalData} />

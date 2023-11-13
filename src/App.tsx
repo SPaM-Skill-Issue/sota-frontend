@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { Layout } from "antd";
 import HeaderNavigation from './components/headerNavigation';
 import Home from './pages/home'
@@ -14,9 +14,11 @@ function App() {
         <BrowserRouter>
             <Layout>
                 <Header className=" bg-eeric-black-light flex">
-                    <div >
-                        <img src="/sotaTransparentBgLogo.svg" alt="SoTA" className=" h-14 pt-3" />
-                    </div>
+                    <Link to={'/'}>
+                        <div >
+                            <img src="/sotaTransparentBgLogo.svg" alt="SoTA" className=" h-14 pt-3" />
+                        </div>
+                    </Link>
                     <div className="w-full flex justify-center">
                         <HeaderNavigation />
                     </div>
