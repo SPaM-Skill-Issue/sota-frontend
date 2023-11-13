@@ -4,7 +4,9 @@ import PieChartComponent from "../components/pieChart";
 import OverallMedalByCountry from "../components/tables/medalByCountry";
 import { useEffect, useState } from 'react';
 import { MedalCount } from '../interfaces/medal'
-
+import ReactCountryFlag from "react-country-flag";
+import SportsIcons from "../components/sportsIcons";
+import { getCountryName } from "../util/iso31661a2";
 
 const Medal = () => {
     const [filterKey, setFilterKey] = useState<string>('');
@@ -88,17 +90,51 @@ const Medal = () => {
             </div>
             <div className="w-2/3 ml-4">
                 <FilterSportCountry dataHandle={setFilterKey} catagoryHandle={setCatagory} />
-                <div className="flex justify-evenly h-fit">
-                    { medalData?.length != 0 ? (
-                        <>
-                            <div className="w-1/3">
-                                <PieChartComponent data={medalData!} />
+                <div className="h-full bg-belft-blue rounded-2xl mt-6">
+                    <div className="p-5 ml-5">
+                    {filterCatagory == "sports" ? 
+                        (<div className="flex">
+                            <div style={{ fill: "#DBA94D", width: 60 }} className="flex justify-center mr-2">
+                                <SportsIcons sportId={Number(filterKey)} />
                             </div>
-                            <div className="w-1/3">
-                                <PieChartComponent data={sportOrCountryData!} />
+                            <div style={{ color: "#DBA94D" }} className="flex justify-center mb-5 mt-5">
+                                <span className="font-primary text-3xl">{filterKey}</span>
                             </div>
-                        </>
-                    ) : (<div className="w-1/3">No medal data lmao</div>)}
+                        </div>) 
+                        : 
+                        (<div className="flex">
+                            <div style={{ width: 60 }} className="flex justify-center mr-2">
+                                <ReactCountryFlag
+                                    className='mx-3 mt-3 flex justify-center items-center'
+                                    countryCode={filterKey}
+                                    svg
+                                    style={{
+                                        width: '2.5em',
+                                        height: '2.5em',
+                                    }}
+                                    title={filterKey}
+                                />
+                            </div>
+                            <div style={{ color: "#DBA94D" }} className="flex justify-center mb-5 mt-5">
+                                <span className="font-primary text-3xl">{getCountryName(filterKey)}</span>
+                            </div>
+                        </div>)}
+                    </div>
+                    <div className="flex justify-evenly">
+                        {medalData?.length != 0 ? (
+                            <>
+                                <div className="w-1/3 bg-belft-blue rounded-2xl mt-7">
+                                    <div className="text-hunyadi-yellow text-3xl mt-7 font-primary justify-center"> Overall Medal </div>
+                                    <PieChartComponent data={medalData!} />
+                                </div>
+                                <div className="w-1/3 bg-belft-blue rounded-2xl mt-7">
+                                    <div className="text-hunyadi-yellow text-3xl mt-7 font-primary justify-center"> Medals from each {filterCatagory == 'sports' ? 'country' : 'sport'} </div>
+                                    <PieChartComponent data={sportOrCountryData!} />
+                                </div>
+                            </>
+                        ) : (<div className=" text-hunyadi-yellow text-3xl font-primary mt-7 flex">No medal data</div>)}
+                    </div>
+
                 </div>
                 <div>
                     {/* TODO: Add medal by country and sport */}
