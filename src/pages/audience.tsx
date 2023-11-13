@@ -26,7 +26,7 @@ const Audience = () => {
     const [ filterCatagory, setCatagory] = useState<string>('');
     return (
         <div>
-            <div className="flex">
+            <div>
                 <FilterComponent dataHandle={setFilterKey} catagoryHandle={setCatagory} />
             </div>
             <div className="flex pt-10">
