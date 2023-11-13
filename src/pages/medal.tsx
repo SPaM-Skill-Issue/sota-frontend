@@ -7,6 +7,7 @@ import { MedalCount } from '../interfaces/medal'
 import ReactCountryFlag from "react-country-flag";
 import SportsIcons from "../components/sportsIcons";
 import { getCountryName } from "../util/iso31661a2";
+import { getSportName } from "../util/sportid";
 
 const Medal = () => {
     const [filterKey, setFilterKey] = useState<string>('');
@@ -98,7 +99,7 @@ const Medal = () => {
                                 <SportsIcons sportId={Number(filterKey)} />
                             </div>
                             <div style={{ color: "#DBA94D" }} className="flex justify-center mb-5 mt-5">
-                                <span className="font-primary text-3xl">{filterKey}</span>
+                                <span className="font-primary text-3xl">{getSportName(filterKey)}</span>
                             </div>
                         </div>) 
                         : 
