@@ -16,13 +16,16 @@ const BarChart: React.FC<BarChartProps> = ({ topic, filter }) => {
     const [xFeild, setxField] = useState<string>('');
     const [data, setData] = useState<GenderValue[]>([]);
 
-    function checkGender(gender: string) {
-        if(gender == "M"){
-            return "Male";
-        } else if (gender == "F"){
-            return "Female";
-        }
-        return "Non defined"
+    function checkGender(data: GenderValue[]) {
+        data.forEach((item) => {
+            if(item.gender == "M"){
+                item.gender = "Male";
+            } else if (item.gender == "F"){
+                item.gender = "Female";
+            } else {
+                item.gender = "Non defined";
+            }
+        });
     }
 
     function countBy(list: Audience[]) {
@@ -31,19 +34,21 @@ const BarChart: React.FC<BarChartProps> = ({ topic, filter }) => {
             const result: ResultForSport[] = [];
             list.forEach((item) => {
                 if (item.sport_id.includes(Number(filter))) {
-                    if ((result.filter((result_item) => result_item.country == item.country_code && result_item.gender == item.gender)).length == 0) {
+                    const country_name = getCountryName(item.country_code);
+                    if ((result.filter((result_item) => result_item.country == country_name && result_item.gender == item.gender)).length == 0) {
                         const data: ResultForSport = {
-                            country: getCountryName(item.country_code),
-                            gender: checkGender(item.gender),
+                            country: country_name,
+                            gender: item.gender,
                             value: 1
                         };
                         result.push(data);
                     }
                     else {
-                        result.filter((result_item) => result_item.country == item.country_code && result_item.gender == item.gender)[0].value += 1;
+                        result.filter((result_item) => result_item.country == country_name && result_item.gender == item.gender)[0].value += 1;
                     }
                 }
             });
+            checkGender(result);
             setData(result);
         }
         else if (topic == "country") {
@@ -52,20 +57,22 @@ const BarChart: React.FC<BarChartProps> = ({ topic, filter }) => {
             list.forEach((item) => {
                 if (item.country_code.includes(filter)) {
                     item.sport_id.forEach((id) => {
-                        if ((result.filter((result_item) => result_item.sport == String(id) && result_item.gender == item.gender)).length == 0) {
+                        const sport_name = getSportName(String(id))
+                        if ((result.filter((result_item) => {return result_item.sport == sport_name && result_item.gender == item.gender})).length == 0) {
                             const data: ResultForCountry = {
-                                sport: getSportName(String(id)),
-                                gender: checkGender(item.gender),
+                                sport: sport_name,
+                                gender: item.gender,
                                 value: 1
                             };
                             result.push(data);
                         }
                         else {
-                            result.filter((result_item) => result_item.sport == String(id) && result_item.gender == item.gender)[0].value += 1;
+                            result.filter((result_item) => result_item.sport == sport_name && result_item.gender == item.gender)[0].value += 1;
                         }
                     });
                 }
             });
+            checkGender(result);
             setData(result);
         }
     }
