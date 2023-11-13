@@ -2,6 +2,7 @@ import BarChart from "../components/barChart";
 import FilterComponent from "../components/filterSportCountry";
 import PieChartComponent from "../components/pieChart";
 import TotalAudienceNumber from "../components/totalAudienceNumber";
+import { useState } from "react";
 
 const audienceAgeData = [
     { type: '< 18', value: 27 },
@@ -21,10 +22,12 @@ const audienceGraphData = {
 
 
 const Audience = () => {
+    const [ filterKey, setFilterKey ] = useState<string>('');
+    const [ filterCatagory, setCatagory] = useState<string>('');
     return (
         <div>
             <div className="felx">
-                <FilterComponent />
+                <FilterComponent dataHandle={setFilterKey} catagoryHandle={setCatagory} />
             </div>
             <div className="flex pt-10">
                 <div className="w-1/3">
