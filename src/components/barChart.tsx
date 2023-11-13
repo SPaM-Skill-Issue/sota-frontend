@@ -105,7 +105,7 @@ const BarChart: React.FC<BarChartProps> = ({ topic, filter }) => {
 
     return data.length == 0 ? (
         <div className="flex items-center justify-center w-full h-[75vh]">
-            <span className='text-hunyadi-yellow text-3xl'>No DATA</span>
+            <span className='font-primary text-hunyadi-yellow text-3xl'>No DATA</span>
         </div>
     ) :(isLoaded ? (
         <div className="flex items-center justify-center w-full h-[75vh]">
