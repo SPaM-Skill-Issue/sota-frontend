@@ -96,11 +96,15 @@ const BarChart: React.FC<BarChartProps> = ({ topic, filter }) => {
         isGroup: true,
     }
 
-    return isLoaded ? (
-        <div className="flex items-center justify-center w-screen h-[75vh]">
+    return data.length == 0 ? (
+        <div className="flex items-center justify-center w-full h-[75vh]">
+            <span className='text-hunyadi-yellow text-3xl'>No DATA</span>
+        </div>
+    ) :(isLoaded ? (
+        <div className="flex items-center justify-center w-full h-[75vh]">
             <Spin size="large" />
         </div>
-    ) : <Column {...config} />;
+    ) : <Column {...config} />)
 };
 
 export default BarChart;
