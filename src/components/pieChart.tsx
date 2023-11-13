@@ -1,11 +1,9 @@
 import React from 'react';
 import { Pie } from '@ant-design/plots';
+import { MedalCount } from '../interfaces/medal';
 
 interface PieChartComponentProps {
-    data: {
-        type: string;
-        value: number;
-    }[];
+    data: MedalCount[];
 }
 
 const PieChartComponent: React.FC<PieChartComponentProps> = ({ data }) => {
