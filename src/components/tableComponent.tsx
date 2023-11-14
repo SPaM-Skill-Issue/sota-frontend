@@ -42,12 +42,15 @@ const SotaTable: React.FC<Partial<SotaTableProps<any>>> = (props) => {
     /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
         setLoaded(false);
+    }, []);
+
+    useEffect(() => {
         update();
         const interval = setInterval(() => {
             update();
         }, props.refreshRate!*1000);
         return () => clearInterval(interval);
-    }, []);
+    }, [props.src]);
     /* eslint-enable */
 
     return (

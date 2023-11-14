@@ -1,9 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Table } from "antd";
 import { SportEntry } from "../../interfaces/table";
 import { SotaTable, SotaTableProps, TableRow } from "../tableComponent";
 import MedalIcon from "../medalIcon";
-import SportsIcons from "../sportsIcons";
 
 const opts: Omit<SotaTableProps<SportEntry>, "src"> = {
     dataProcess: (data): TableRow<SportEntry>[] => {
@@ -45,7 +44,6 @@ const opts: Omit<SotaTableProps<SportEntry>, "src"> = {
             };
             return row;
         });
-        console.log(result);
         return result;
     },
     columns: [
@@ -76,18 +74,24 @@ const opts: Omit<SotaTableProps<SportEntry>, "src"> = {
     ],
     tableProps: {
         tableLayout: "fixed",
+        pagination: false
     }
 }
 
 interface Props {
-    src: string;
+    country: string;
 }
 
 const MedalForSingleCountry: React.FC<Props> = (props) => { 
-    useEffect(() => {}, [props.src]);
+
+    const [ src, setSrc ] = useState<string>(`https://sota-backend.fly.dev/medal/c/${props.country}`);
+
+    useEffect(() => {
+        setSrc(`https://sota-backend.fly.dev/medal/c/${props.country}`);
+    }, [props.country]);
 
     return (
-        <SotaTable src={props.src} {...opts} />
+        <SotaTable src={src} {...opts} />
     );
 };
 

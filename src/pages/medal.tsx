@@ -44,17 +44,34 @@ const Medal = () => {
             </div>
             <div className="w-2/3 ml-4">
                 <FilterSportCountry dataHandle={setFilterKey} catagoryHandle={setCatagory}/>
-                <div className="flex justify-evenly h-fit">
-                    <div className="w-1/3">
-                        <PieChartComponent data={medalData} />
+                <div className="mt-6 scrollable-container h-fit max-h-[75vh] overflow-y-auto bg-belft-blue rounded-lg">
+                    <div className="flex justify-evenly h-fit">
+                        <div className="w-1/3">
+                            <PieChartComponent data={medalData} />
+                        </div>
+                        <div className="w-1/3">
+                            <PieChartComponent data={sportOrCountryData} />
+                        </div>
                     </div>
-                    <div className="w-1/3">
-                        <PieChartComponent data={sportOrCountryData} />
+                    <ConfigProvider theme={{
+                        components: {
+                            Table: {
+                                headerSplitColor: "rgba(0, 0, 0, 0)",
+                                borderColor: "rgba(0, 0, 0, 0.4)",
+                                headerBg: "#3E586C",
+                            },
+                        },
+                        token: {
+                            fontSize: 16,
+                            colorBgContainer: "#3E586C"
+                        },
+                    }}>
+                    <div>
+                        { filterCatagory == "country" &&
+                            <MedalForSingleCountry country={filterKey} />
+                        }
                     </div>
-                </div>
-                <div>
-                    {/* TODO: Add medal by country and sport */}
-                    <MedalForSingleCountry src="https://sota-backend.fly.dev/medal/c/US" />
+                    </ConfigProvider>
                 </div>
             </div>
         </div>
