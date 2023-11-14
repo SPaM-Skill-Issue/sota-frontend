@@ -3,6 +3,7 @@ import FilterSportCountry from "../components/filterSportCountry";
 import PieChartComponent from "../components/pieChart";
 import OverallMedalByCountry from "../components/tables/medalByCountry";
 import { useState } from "react";
+import MedalForSingleCountry from "../components/tables/medalForSingleCountry";
 
 const medalData = [
     { type: 'Glod', value: 27 },
@@ -53,6 +54,7 @@ const Medal = () => {
                 </div>
                 <div>
                     {/* TODO: Add medal by country and sport */}
+                    <MedalForSingleCountry src="https://sota-backend.fly.dev/medal/c/US" />
                 </div>
             </div>
         </div>

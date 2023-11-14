@@ -7,7 +7,8 @@ import React, { useEffect, useState } from 'react';
 type ColumnType = React.ReactElement<typeof Table.Column>;
 
 export type TableRow<T> = {
-    key: number
+    key: number | string,
+    children?: object[] | undefined
 } & T;
 export type DataProcessor<T> = (data: any) => TableRow<T>[];
 

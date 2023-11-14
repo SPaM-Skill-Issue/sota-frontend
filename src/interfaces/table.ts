@@ -9,16 +9,20 @@ export interface CountryEntry {
 
 export interface SportEntry {
     rank: number;
-    sportId: number;
-    sportName: string;
+    name?: string | undefined;
+    sport_id: number;
+    sport_name: string;
     total: number;
     gold: number;
     silver: number;
     bronze: number;
+    sub_sports: SubSportEntry[];
 }
 
 export interface SubSportEntry {
-    subSportName: string;
+    key: string;
+    name?: string | undefined;
+    sub_name: string;
     total: number;
     gold: number;
     silver: number;
