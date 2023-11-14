@@ -49,8 +49,8 @@ const opts: Omit<SotaTableProps<SportEntry>, "src"> = {
     columns: [
         (<Table.Column key="rank" dataIndex="rank" render={(n) => n ? (
             <span className="font-bold font-primary text-hunyadi-yellow">#{n}</span>
-        ) : (<></>)} width={90} />),
-        (<Table.Column key="name" dataIndex="name" />),
+        ) : (<></>)} width={80} />),
+        (<Table.Column key="name" dataIndex="name" ellipsis={true} />),
         (<Table.Column key="total" dataIndex="total" render={(t: number) => (
             <span className="font-bold">{t}</span>
         )} title={

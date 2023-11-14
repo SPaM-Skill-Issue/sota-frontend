@@ -1,6 +1,8 @@
 export interface CountryEntry {
     rank: number;
-    country: string;
+    country?: string | undefined;
+    country_code?: string | undefined;
+    country_name?: string | undefined;
     total: number;
     gold: number;
     silver: number;

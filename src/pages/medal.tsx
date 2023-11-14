@@ -4,6 +4,7 @@ import PieChartComponent from "../components/pieChart";
 import OverallMedalByCountry from "../components/tables/medalByCountry";
 import { useState } from "react";
 import MedalForSingleCountry from "../components/tables/medalForSingleCountry";
+import MedalForSingleSport from "../components/tables/medalForSingleSport";
 
 const medalData = [
     { type: 'Glod', value: 27 },
@@ -69,6 +70,9 @@ const Medal = () => {
                     <div>
                         { filterCatagory == "country" &&
                             <MedalForSingleCountry country={filterKey} />
+                        }
+                        { filterCatagory == "sports" &&
+                            <MedalForSingleSport sport={parseInt(filterKey)} />
                         }
                     </div>
                     </ConfigProvider>
