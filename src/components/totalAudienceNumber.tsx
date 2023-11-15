@@ -1,4 +1,7 @@
 import { ManOutlined, TeamOutlined, WomanOutlined } from "@ant-design/icons";
+import { Audience, GenderValue, ResultForCountry, ResultForSport } from '../interfaces/audienceBarChart';
+import { useState } from "react";
+import { useEffect } from "react";
 
 interface TotalAudienceNumberData {
     total: number;
@@ -15,6 +18,27 @@ const data: TotalAudienceNumberData = {
 }
 
 const TotalAudienceNumber = () => {
+    const [isLoaded, setLoaded] = useState<boolean>(false);
+    const [data, setData] = useState<TotalAudienceNumberData>;
+
+    useEffect(() => {
+        const fetchData = async () => {
+            setLoaded(true);
+            try {
+                const res_a = await fetch("https://sota-backend.fly.dev/audient")
+                const audience_json:Audience[] = await res_a.json();
+                const result: TotalAudienceNumberData = { total: 0, man: 0, woman: 0, noneDefine: 0 };
+                audience_json.forEach(element => {
+                    if()
+                });
+                let total_audience = audience_men + audience_woman + audience_unknow;
+                console.log(audience_men, audience_woman, audience_unknow, total_audience)
+            } catch (error) {
+                console.error("Error fetching data: ", error);
+            }
+        }
+        fetchData()
+    }, []);
 
     return (
         <div className=" bg-belft-blue rounded-2xl">
