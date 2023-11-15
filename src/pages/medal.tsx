@@ -8,6 +8,8 @@ import ReactCountryFlag from "react-country-flag";
 import SportsIcons from "../components/sportsIcons";
 import { getCountryName } from "../util/iso31661a2";
 import { getSportName } from "../util/sportid";
+import { Spin } from 'antd';
+
 
 const Medal = () => {
     const [filterKey, setFilterKey] = useState<string>('');
@@ -21,6 +23,7 @@ const Medal = () => {
     useEffect(() => {
         const fetchMedal = async () => {
             try {
+
                 if (filterCatagory == '' || filterKey == '') {
                     setMedal(mockData);
                     setSportOrCountryData(mockData);
@@ -67,9 +70,10 @@ const Medal = () => {
             }
         };
         fetchMedal();
+
     }, [filterCatagory, filterKey]);
 
-    return !load && (
+    return  (
         <div className="flex">
             <div className="w-1/3 overflow-auto">
                 <ConfigProvider theme={{
@@ -122,7 +126,11 @@ const Medal = () => {
                         </div>)}
                     </div>
                     <div className="flex justify-evenly">
-                        {medalData?.length != 0 ? (
+                        { load ? (
+                            <div className="flex justify-center h-full">
+                                <Spin size="large"/>
+                            </div> ) : 
+                            ( medalData?.length != 0 ? (
                             <>
                                 <div className="w-1/3 bg-belft-blue rounded-2xl mt-7">
                                     <div className="text-hunyadi-yellow text-3xl mt-7 font-primary justify-center"> Overall Medal </div>
@@ -133,7 +141,7 @@ const Medal = () => {
                                     <PieChartComponent data={sportOrCountryData!} />
                                 </div>
                             </>
-                        ) : (<div className=" text-hunyadi-yellow text-3xl font-primary mt-7 flex">No medal data</div>)}
+                        ) : (<div className=" text-hunyadi-yellow text-3xl font-primary mt-7 flex">No medal data</div>))}
                     </div>
 
                 </div>
