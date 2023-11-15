@@ -2,19 +2,52 @@ import PieChartComponent from "./pieChart";
 import { ConfigProvider } from "antd";
 import { ArrowRightOutlined } from '@ant-design/icons';
 import MedalTable from "./tables/medalByCountryHomePage";
-
-const data = [
-    { type: 'Glod', value: 27 },
-    { type: 'Silver', value: 25 },
-    { type: 'Bronze', value: 18 },
-];
+import { MedalCount } from "../interfaces/medal";
+import { useState, useEffect } from "react";
 
 const OverallMedal = () => {
+    const [medalData, setMedal] = useState<MedalCount[] | null>();
+    const [load, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchMedal = async () => {
+            try {
+                const res = await fetch(`https://sota-backend.fly.dev/medals`);
+                const data = await res.json();
+                
+                let key: keyof typeof data;
+                let gold: number = 0;
+                let silver: number = 0;
+                let bronze: number = 0;
+
+                for (key in data) {
+                    gold += data[key]['gold'];
+                    silver += data[key]['silver'];
+                    bronze += data[key]['bronze'];
+                }
+
+                const countryMedalsNew: MedalCount[] = [];
+                countryMedalsNew.push({ type: 'gold', value: gold });
+                countryMedalsNew.push({ type: 'silver', value: silver });
+                countryMedalsNew.push({ type: 'bronze', value: bronze });
+
+                setMedal(countryMedalsNew);
+
+            } catch (error) {
+                console.error("Error fetching overall medal data of every sport: ", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchMedal();
+    });
     return (
         <div className="flex-row bg-belft-blue rounded-3xl">
             <div className="flex w-full p-5">
-                <div>
-                    <PieChartComponent data={data} />
+                <div className="flex justify-center">
+                    { !load && (
+                        <PieChartComponent data={medalData!} />
+                    )}
                 </div>
                 <div className="w-full">
                     <div className=" flex justify-end">
