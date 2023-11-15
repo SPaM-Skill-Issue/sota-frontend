@@ -21,7 +21,7 @@ const Audience = () => {
                 const res = await fetch(`https://sota-backend.fly.dev/audient`);
                 const data = await res.json();
 
-                let audienceNew: AudienceAgeRange[] = [];
+                const audienceNew: AudienceAgeRange[] = [];
                 audienceNew.push({ type: "< 18", value: 0});
                 audienceNew.push({ type: "18-30", value: 0});
                 audienceNew.push({ type: "31-40", value: 0});
@@ -30,7 +30,7 @@ const Audience = () => {
                 audienceNew.push({ type: "> 60", value: 0});
 
                 
-                for(var val of data) {
+                for(const val of data) {
                     val['age'] < 18 ? audienceNew[0]['value'] += 1 : 
                     val['age'] < 30 ? audienceNew[1]['value'] += 1 : 
                     val['age'] < 40 ? audienceNew[2]['value'] += 1 : 

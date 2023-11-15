@@ -26,7 +26,7 @@ const OverallMedal = () => {
                     bronze += data[key]['bronze'];
                 }
 
-                let countryMedalsNew: MedalCount[] = [];
+                const countryMedalsNew: MedalCount[] = [];
                 countryMedalsNew.push({ type: 'gold', value: gold });
                 countryMedalsNew.push({ type: 'silver', value: silver });
                 countryMedalsNew.push({ type: 'bronze', value: bronze });

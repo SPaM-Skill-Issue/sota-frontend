@@ -18,11 +18,10 @@ const Medal = () => {
     const [sportOrCountryData, setSportOrCountryData] = useState<MedalCount[] | null>();
     const [load, setLoading] = useState(true);
 
-    const mockData: MedalCount[] = [];
-
     useEffect(() => {
         const fetchMedal = async () => {
             try {
+                const mockData: MedalCount[] = [];
 
                 if (filterCatagory == '' || filterKey == '') {
                     setMedal(mockData);
@@ -45,16 +44,16 @@ const Medal = () => {
                 ]
                 setMedal(medalNew);
 
-                let sportOrCountryNew: MedalCount[] = [];
+                const sportOrCountryNew: MedalCount[] = [];
 
-                for (var val of data[`${filterCatagory == 'sports' ? 'individual_countries' : 'individual_sports'}`]) {
+                for (const val of data[`${filterCatagory == 'sports' ? 'individual_countries' : 'individual_sports'}`]) {
                     sportOrCountryNew.push({
                         type: val[filterCatagory == 'sports' ? 'country_name' : 'sport_name'],
                         value: val['bronze'] + val['silver'] + val['gold']
                     });
                 }
 
-                let itemsToSort = sportOrCountryNew.sort(
+                const itemsToSort = sportOrCountryNew.sort(
                     (first, second) => (first['value'] > second['value'] ? -1 : 1)
                 );
 
