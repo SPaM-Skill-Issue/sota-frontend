@@ -12,25 +12,22 @@ interface SportsIconsData {
 
 const SportsIcons: React.FC<SportsIconsProps> = ({ sportId }) => {
     const [data, setData] = useState<SportsIconsData[]>([]);
-    
-    // Custom cache object
-    const cache: { [key: number]: SportsIconsData[] } = {};
 
     useEffect(() => {
         const fetchSportsIcons = async () => {
             try {
-                if (cache[sportId]) {
-                    // If icons are in cache, set data from cache
-                    setData(cache[sportId]);
+                let sportsData: SportsIconsData[] = [];
+                const cachedData = localStorage.getItem('sportsIconsData');
+                if (cachedData) {
+                    sportsData = JSON.parse(cachedData) as SportsIconsData[];
                 } else {
                     const response = await fetch('/sportsIconsData.json');
-                    const sportsData = await response.json() as SportsIconsData[];
-                    const filteredData = sportsData.filter((sport) => sport.sport_id === sportId);
-                    setData(filteredData);
-
-                    // Cache the fetched icons
-                    cache[sportId] = filteredData;
+                    sportsData = await response.json() as SportsIconsData[];
+                    localStorage.setItem('sportsIconsData', JSON.stringify(sportsData));
                 }
+
+                const filteredData = sportsData.filter((sport) => sport.sport_id === sportId);
+                setData(filteredData);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
