@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Audience, GenderValue, ResultForCountry, ResultForSport } from '../interfaces/audienceBarChart';
 import { getSportName } from '../util/sportid';
 import { getCountryName } from '../util/iso31661a2';
+import { LegendCfg } from '@antv/g2/lib/interface';
 
 interface BarChartProps {
     topic: string;
@@ -18,9 +19,9 @@ const BarChart: React.FC<BarChartProps> = ({ topic, filter }) => {
 
     function checkGender(data: GenderValue[]) {
         data.forEach((item) => {
-            if(item.gender == "M"){
+            if (item.gender == "M") {
                 item.gender = "Male";
-            } else if (item.gender == "F"){
+            } else if (item.gender == "F") {
                 item.gender = "Female";
             } else {
                 item.gender = "Non defined";
@@ -58,7 +59,7 @@ const BarChart: React.FC<BarChartProps> = ({ topic, filter }) => {
                 if (item.country_code.includes(filter)) {
                     item.sport_id.forEach((id) => {
                         const sport_name = getSportName(String(id))
-                        if ((result.filter((result_item) => {return result_item.sport == sport_name && result_item.gender == item.gender})).length == 0) {
+                        if ((result.filter((result_item) => { return result_item.sport == sport_name && result_item.gender == item.gender })).length == 0) {
                             const data: ResultForCountry = {
                                 sport: sport_name,
                                 gender: item.gender,
@@ -95,19 +96,46 @@ const BarChart: React.FC<BarChartProps> = ({ topic, filter }) => {
         fetchData();
     }, [topic, filter]);
 
+    const legendCfg: LegendCfg = {
+        position: "bottom",
+        itemName: {
+            style: {
+                fill: "#fff",
+                fontFamily: "Noto Sans",
+            },
+        },
+    }
+
     const config = {
         data,
         xField: xFeild,
         yField: "value",
         seriesField: 'gender',
         isGroup: true,
-    }
+        legend: legendCfg,
+        xAxis: {
+            label: {
+                style: {
+                    fill: "#fff",
+                    fontFamily: "Noto Sans",
+                },
+            },
+        },
+        yAxis: {
+            label: {
+                style: {
+                    fill: "#fff",
+                    fontFamily: "Noto Sans",
+                },
+            },
+        },
+    };
 
     return data.length == 0 ? (
         <div className="flex items-center justify-center w-full h-[75vh]">
             <span className='font-primary text-hunyadi-yellow text-3xl'>No DATA</span>
         </div>
-    ) :(isLoaded ? (
+    ) : (isLoaded ? (
         <div className="flex items-center justify-center w-full h-[75vh]">
             <Spin size="large" />
         </div>

@@ -9,7 +9,8 @@ import SportsIcons from "../components/sportsIcons";
 import { getCountryName } from "../util/iso31661a2";
 import { getSportName } from "../util/sportid";
 import { Spin } from 'antd';
-
+import MedalForSingleCountry from "../components/tables/medalForSingleCountry";
+import MedalForSingleSport from "../components/tables/medalForSingleSport";
 
 const Medal = () => {
     const [filterKey, setFilterKey] = useState<string>('');
@@ -142,13 +143,31 @@ const Medal = () => {
                             </>
                         ) : (<div className=" text-hunyadi-yellow text-3xl font-primary mt-7 flex">No medal data</div>))}
                     </div>
-
                 </div>
-                <div>
-                    {/* TODO: Add medal by country and sport */}
+                    <ConfigProvider theme={{
+                        components: {
+                            Table: {
+                                headerSplitColor: "rgba(0, 0, 0, 0)",
+                                borderColor: "rgba(0, 0, 0, 0.4)",
+                                headerBg: "#3E586C",
+                            },
+                        },
+                        token: {
+                            fontSize: 16,
+                            colorBgContainer: "#3E586C"
+                        },
+                    }}>
+                    <div>
+                        { filterCatagory == "country" &&
+                            <MedalForSingleCountry country={filterKey} />
+                        }
+                        { filterCatagory == "sports" &&
+                            <MedalForSingleSport sport={parseInt(filterKey)} />
+                        }
+                    </div>
+                    </ConfigProvider>
                 </div>
             </div>
-        </div>
     );
 }
 

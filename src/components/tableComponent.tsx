@@ -7,7 +7,8 @@ import React, { useEffect, useState } from 'react';
 type ColumnType = React.ReactElement<typeof Table.Column>;
 
 export type TableRow<T> = {
-    key: number
+    key: number | string,
+    children?: object[] | undefined
 } & T;
 export type DataProcessor<T> = (data: any) => TableRow<T>[];
 
@@ -41,12 +42,15 @@ const SotaTable: React.FC<Partial<SotaTableProps<any>>> = (props) => {
     /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
         setLoaded(false);
+    }, []);
+
+    useEffect(() => {
         update();
         const interval = setInterval(() => {
             update();
         }, props.refreshRate!*1000);
         return () => clearInterval(interval);
-    }, []);
+    }, [props.src]);
     /* eslint-enable */
 
     return (
