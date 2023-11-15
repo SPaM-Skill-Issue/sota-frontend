@@ -95,7 +95,7 @@ const Medal = () => {
             </div>
             <div className="w-2/3 ml-4">
                 <FilterSportCountry dataHandle={setFilterKey} catagoryHandle={setCatagory} />
-                <div className="h-full bg-belft-blue rounded-2xl mt-6">
+                <div className="mt-6 scrollable-container h-fit max-h-[75vh] overflow-y-auto bg-belft-blue rounded-lg">
                     <div className="p-5 ml-5">
                     {filterCatagory == "sports" ? 
                         (<div className="flex">
@@ -143,31 +143,33 @@ const Medal = () => {
                             </>
                         ) : (<div className=" text-hunyadi-yellow text-3xl font-primary mt-7 flex">No medal data</div>))}
                     </div>
-                </div>
-                    <ConfigProvider theme={{
-                        components: {
-                            Table: {
-                                headerSplitColor: "rgba(0, 0, 0, 0)",
-                                borderColor: "rgba(0, 0, 0, 0.4)",
-                                headerBg: "#3E586C",
+                    <div >
+                        <ConfigProvider theme={{
+                            components: {
+                                Table: {
+                                    headerSplitColor: "rgba(0, 0, 0, 0)",
+                                    borderColor: "rgba(0, 0, 0, 0.4)",
+                                    headerBg: "#3E586C",
+                                },
                             },
-                        },
-                        token: {
-                            fontSize: 16,
-                            colorBgContainer: "#3E586C"
-                        },
-                    }}>
-                    <div>
-                        { filterCatagory == "country" &&
-                            <MedalForSingleCountry country={filterKey} />
-                        }
-                        { filterCatagory == "sports" &&
-                            <MedalForSingleSport sport={parseInt(filterKey)} />
-                        }
+                            token: {
+                                fontSize: 16,
+                                colorBgContainer: "#3E586C"
+                            },
+                        }}>
+                        <div>
+                            { filterCatagory == "country" &&
+                                <MedalForSingleCountry country={filterKey} />
+                            }
+                            { filterCatagory == "sports" &&
+                                <MedalForSingleSport sport={parseInt(filterKey)} />
+                            }
+                        </div>
+                        </ConfigProvider>
                     </div>
-                    </ConfigProvider>
                 </div>
             </div>
+        </div>
     );
 }
 
