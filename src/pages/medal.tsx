@@ -32,7 +32,7 @@ const Medal = () => {
                 const res = await fetch(`https://sota-backend.fly.dev/medal/${filterCatagory.charAt(0).toLowerCase()}/${filterKey}`);
                 const data = await res.json();
 
-                if (!data['gold']) {
+                if (!data['gold'] && !data['silver'] && !data['bronze']) {
                     setMedal(mockData);
                     setSportOrCountryData(mockData);
                     return;
