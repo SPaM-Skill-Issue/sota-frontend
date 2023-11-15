@@ -96,7 +96,7 @@ const Medal = () => {
             <div className="w-2/3 ml-4">
                 <FilterSportCountry dataHandle={setFilterKey} catagoryHandle={setCatagory} />
                 <div className="mt-6 scrollable-container h-fit max-h-[75vh] overflow-y-auto bg-belft-blue rounded-lg">
-                    <div className="p-5 ml-5">
+                    <div className="mt-5 ml-5">
                     {filterCatagory == "sports" ? 
                         (<div className="flex">
                             <div style={{ fill: "#DBA94D", width: 60 }} className="flex justify-center mr-2">
@@ -132,18 +132,18 @@ const Medal = () => {
                             </div> ) : 
                             ( medalData?.length != 0 ? (
                             <>
-                                <div className="w-1/3 bg-belft-blue rounded-2xl mt-7">
-                                    <div className="text-hunyadi-yellow text-3xl mt-7 font-primary justify-center"> Overall Medal </div>
+                                <div className="w-1/3 bg-belft-blue rounded-2xl mt-3">
+                                    <div className="text-hunyadi-yellow text-2xl mt-7 font-primary justify-center"> Overall Medal </div>
                                     <PieChartComponent data={medalData!} />
                                 </div>
-                                <div className="w-1/3 bg-belft-blue rounded-2xl mt-7">
-                                    <div className="text-hunyadi-yellow text-3xl mt-7 font-primary justify-center"> Medals from each {filterCatagory == 'sports' ? 'country' : 'sport'} </div>
+                                <div className="w-1/3 bg-belft-blue rounded-2xl mt-3">
+                                    <div className="text-hunyadi-yellow text-2xl mt-7 font-primary justify-center"> Medals from each {filterCatagory == 'sports' ? 'country' : 'sport'} </div>
                                     <PieChartComponent data={sportOrCountryData!} />
                                 </div>
                             </>
                         ) : (<div className=" text-hunyadi-yellow text-3xl font-primary mt-7 flex">No medal data</div>))}
                     </div>
-                    <div >
+                    <div className="m-3">
                         <ConfigProvider theme={{
                             components: {
                                 Table: {
