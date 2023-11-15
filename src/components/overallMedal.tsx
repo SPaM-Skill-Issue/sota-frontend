@@ -4,7 +4,6 @@ import { ArrowRightOutlined } from '@ant-design/icons';
 import MedalTable from "./tables/medalByCountryHomePage";
 import { MedalCount } from "../interfaces/medal";
 import { useState, useEffect } from "react";
-import { Spin } from "antd";
 
 const OverallMedal = () => {
     const [medalData, setMedal] = useState<MedalCount[] | null>();
