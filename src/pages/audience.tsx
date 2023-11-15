@@ -2,28 +2,55 @@ import BarChart from "../components/barChart";
 import FilterComponent from "../components/filterSportCountry";
 import PieChartComponent from "../components/pieChart";
 import TotalAudienceNumber from "../components/totalAudienceNumber";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ReactCountryFlag from "react-country-flag";
 import SportsIcons from "../components/sportsIcons";
 import { getSportName } from '../util/sportid';
 import { getCountryName } from '../util/iso31661a2';
-
-
-const audienceAgeData = [
-    { type: '< 18', value: 27 },
-    { type: '19-30', value: 25 },
-    { type: '31-40', value: 18 },
-    { type: '41-50', value: 10 },
-    { type: '51-60', value: 3 },
-    { type: '> 60', value: 3 },
-
-];
-
-
+import { AudienceAgeRange } from "../interfaces/audiencePieChart";
 
 const Audience = () => {
     const [ filterKey, setFilterKey ] = useState<string>('');
     const [ filterCatagory, setCatagory] = useState<string>('');
+    const [ audienceData, setAudience ] = useState<AudienceAgeRange[] | null>();
+    const [ load, setLoading ] = useState(true);
+
+    useEffect(() => {
+        const fetchMedal = async () => {
+            try {
+                const res = await fetch(`https://sota-backend.fly.dev/audient`);
+                const data = await res.json();
+
+                let audienceNew: AudienceAgeRange[] = [];
+                audienceNew.push({ type: "< 18", value: 0});
+                audienceNew.push({ type: "18-30", value: 0});
+                audienceNew.push({ type: "31-40", value: 0});
+                audienceNew.push({ type: "41-50", value: 0});
+                audienceNew.push({ type: "51-60", value: 0});
+                audienceNew.push({ type: "> 60", value: 0});
+
+                
+                for(var val of data) {
+                    val['age'] < 18 ? audienceNew[0]['value'] += 1 : 
+                    val['age'] < 30 ? audienceNew[1]['value'] += 1 : 
+                    val['age'] < 40 ? audienceNew[2]['value'] += 1 : 
+                    val['age'] < 50 ? audienceNew[3]['value'] += 1 : 
+                    val['age'] < 60 ? audienceNew[4]['value'] += 1 : 
+                    audienceNew[5]['value'] += 1;
+                }
+                
+                setAudience(audienceNew);
+
+                console.log(audienceNew);
+
+            } catch (error) {
+                console.error("Error fetching overall medal data of every sport: ", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchMedal();
+    }, []);
     return (
         <div>
             <div>
@@ -35,7 +62,9 @@ const Audience = () => {
                     <div className="rounded-2xl bg-belft-blue mt-5">
                         <div className="p-5">
                             <span className="font-primary text-2xl text-white">Audience Age Chart</span>
-                            <PieChartComponent data={audienceAgeData} />
+                            { !load && (
+                                <PieChartComponent data={audienceData!} />
+                            )}
                         </div>
                     </div>
                 </div>
