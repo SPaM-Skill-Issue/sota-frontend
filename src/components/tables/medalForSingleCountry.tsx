@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Table } from "antd";
+import { Table, Tooltip } from "antd";
 import { SportEntry } from "../../interfaces/table";
 import { SotaTable, SotaTableProps, TableRow } from "../tableComponent";
 import MedalIcon from "../medalIcon";
@@ -40,17 +40,21 @@ const opts: Omit<SotaTableProps<SportEntry>, "src"> = {
                 rank: ++i,
                 name: e.sport_name,
                 children: e.sub_sports,
-                total: e.gold + e.silver + e.bronze
+                total: e.gold + e.silver + e.bronze,
             };
             return row;
-        });
+        }) || [];
         return result;
     },
     columns: [
         (<Table.Column key="rank" dataIndex="rank" render={(n) => n ? (
             <span className="font-bold font-primary text-hunyadi-yellow">#{n}</span>
         ) : (<></>)} width={80} />),
-        (<Table.Column key="name" dataIndex="name" ellipsis={true} />),
+        (<Table.Column key="name" dataIndex="name" ellipsis={true} render={(s: string) => (
+            <Tooltip className="font-primary" title={s} placement="left">
+                {s}
+            </Tooltip>
+        )} />),
         (<Table.Column key="total" dataIndex="total" render={(t: number) => (
             <span className="font-bold">{t}</span>
         )} title={
@@ -84,14 +88,23 @@ interface Props {
 
 const MedalForSingleCountry: React.FC<Props> = (props) => { 
 
-    const [ src, setSrc ] = useState<string>(`https://sota-backend.fly.dev/medal/c/${props.country}`);
+    const [ src, setSrc ] = useState<string>('');
+    const [ loaded, setLoaded ] = useState<boolean>(false);
 
     useEffect(() => {
+        setLoaded(false);
+        if (props.country == '') {
+            setSrc('');
+            return () => {};
+        }
         setSrc(`https://sota-backend.fly.dev/medal/c/${props.country}`);
+        setLoaded(true);
     }, [props.country]);
 
-    return (
+    return loaded ? (
         <SotaTable src={src} {...opts} />
+    ) : (
+        <></>
     );
 };
 

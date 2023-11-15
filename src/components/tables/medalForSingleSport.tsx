@@ -9,7 +9,7 @@ import MedalIcon from "../medalIcon";
 const opts: Omit<SotaTableProps<CountryEntry>, "src"> = {
     dataProcess: (data): TableRow<CountryEntry>[] => {
         const result: TableRow<CountryEntry>[] = [];
-        const countries: CountryEntry[] = data["individual_countries"];
+        const countries: CountryEntry[] = data["individual_countries"] || [];
         countries.forEach(e => {
             result.push({
                 key: 0,
@@ -92,14 +92,23 @@ interface Props {
 
 const MedalForSingleSport: React.FC<Props> = (props) => {
 
-    const [ src, setSrc ] = useState<string>(`https://sota-backend.fly.dev/medal/s/${props.sport}`);
+    const [ src, setSrc ] = useState<string>('');
+    const [ loaded, setLoaded ] = useState<boolean>(false);
 
     useEffect(() => {
+        setLoaded(false);
+        if (Number.isNaN(props.sport)) {
+            setSrc('');
+            return () => {};
+        }
         setSrc(`https://sota-backend.fly.dev/medal/s/${props.sport}`);
+        setLoaded(true);
     }, [props.sport]);
 
-    return (
+    return loaded ? (
         <SotaTable src={src} {...opts} />
+    ) : (
+        <></>
     );
 
 };
