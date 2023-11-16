@@ -1,6 +1,10 @@
 import { ArrowRightOutlined } from "@ant-design/icons";
 import SportsIcons from "./sportsIcons";
 import SportCard from "./sportCard";
+import { getSportName } from '../util/sportid';
+import { Audience} from '../interfaces/audienceBarChart';
+import { useState } from "react";
+import { useEffect } from "react";
 
 const topFiveSports = [
     {
@@ -25,7 +29,49 @@ const topFiveSports = [
     }
 ];
 
+interface topFiveSports{
+    sportsName:string;
+    value:number;
+}
+
 const MostInterestSports = () => {
+    const [isLoaded, setLoaded] = useState<boolean>(false);
+    const [data, setData] = useState<topFiveSports[]>([]);
+
+    function count_interest_sport(list: Audience[]) {
+        const result :topFiveSports[] = []
+        list.forEach(element => {
+            element.sport_id.forEach(id => {
+                const sport_name = getSportName(String(id));
+                if(result.filter((result_items =>{return result_items.sportsName == sport_name})).length==0){
+                    const data: topFiveSports ={
+                        sportsName: sport_name,
+                        value:1
+                    };
+                    result.push(data);
+                } else {
+                    result.filter(result_items => result_items.sportsName == sport_name)[0].value+=1;
+                }
+            })
+        })
+        setData(result);
+    }
+
+    useEffect(() => {
+        const fetchData = async () => {
+            setLoaded(true);
+            try {
+                const res_a = await fetch("https://sota-backend.fly.dev/audient")
+                const audience_json: Audience[] = await res_a.json();
+                count_interest_sport(audience_json);
+            } catch (error) {
+                console.error("Error fetching data: ", error);
+            }
+        };
+        fetchData();
+        setLoaded(false)
+    });
+
     return (
         <div className="flex-row bg-belft-blue rounded-3xl">
             <div className="flex-row w-full p-5">
