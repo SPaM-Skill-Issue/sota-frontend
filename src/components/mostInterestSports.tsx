@@ -39,7 +39,6 @@ const MostInterestSports = () => {
         })
         const result: topFiveSports[] = allSports.sort((a, b) => b.value - a.value).slice(0, 5)
         setData(result);
-        console.log(result);
     }
 
     useEffect(() => {
