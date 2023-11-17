@@ -11,6 +11,7 @@ interface TotalAudience {
     noneDefine: number;
 }
 
+
 const TotalAudienceNumber = () => {
     const [isLoaded, setLoaded] = useState<boolean>(false);
     const [data, setData] = useState<TotalAudience>();
@@ -43,26 +44,27 @@ const TotalAudienceNumber = () => {
             }
         };
         fetchData();
-        setLoaded(false)
-    });
+        setLoaded(false);
+    },[]);
 
     return (
         <div className=" bg-belft-blue rounded-2xl">
             <div className=" p-5">
                 <span className=" font-primary text-2xl text-white">Total Number of Audient</span>
-                {isLoaded ? (<div className="flex items-center justify-center w-full h-[20vh]">
+                {isLoaded ? 
+                (<div className="flex items-center justify-center w-full h-[20vh]">
                     <Spin size="large" />
                 </div>) : (data ?
                     (<><div className="flex justify-center py-5">
-                        <span className=" text-hunyadi-yellow text-3xl">{data.total} <TeamOutlined /></span>
+                        <span className=" text-hunyadi-yellow text-3xl">{data.total.toLocaleString()} <TeamOutlined /></span>
                     </div>
                         <div>
                             <div className="flex justify-center">
-                                <span className="text-white"><ManOutlined /> {data.man}</span>
-                                <span className="text-white ml-5"><WomanOutlined /> {data.woman}</span>
+                                <span className="text-white"><ManOutlined /> {data.man.toLocaleString()}</span>
+                                <span className="text-white ml-5"><WomanOutlined /> {data.woman.toLocaleString()}</span>
                             </div>
                             <div className="flex justify-center">
-                                <span className="text-white"><MinusCircleOutlined /> {data.noneDefine}</span>
+                                <span className="text-white"><MinusCircleOutlined /> {data.noneDefine.toLocaleString()}</span>
                             </div>
                         </div></>) :
                     (<div className="flex items-center justify-center w-full h-[20vh]">
