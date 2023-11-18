@@ -40,7 +40,7 @@ const OverallMedal = () => {
             }
         };
         fetchMedal();
-    });
+    }, []);
     return (
         <div className="flex-row bg-belft-blue rounded-3xl">
             <div className="flex w-full p-5">
