@@ -17,13 +17,14 @@ export interface SotaTableProps<T> {
     columns?: ColumnType[];
     refreshRate?: number;
     tableProps?: Omit<TableProps<T>, "dataSource" | "loading">;
+    seamless?: boolean;
     dataProcess: DataProcessor<T>;
 }
 
 const SotaTable: React.FC<Partial<SotaTableProps<any>>> = (props) => {
-    
-    const [ isLoaded, setLoaded ] = useState<boolean>(false);
-    const [ data, setData ] = useState<TableRow<any>[]>([]);
+
+    const [isLoaded, setLoaded] = useState<boolean>(false);
+    const [data, setData] = useState<TableRow<any>[]>([]);
 
     const fetchData = async (): Promise<any> => {
         const res = await fetch(props.src!);
@@ -32,10 +33,11 @@ const SotaTable: React.FC<Partial<SotaTableProps<any>>> = (props) => {
     }
 
     const update = () => {
+        if (!props.seamless) setLoaded(false);
         fetchData().then((res) => {
             const data: TableRow<any>[] = props.dataProcess!.apply(null, [res]);
             setData(data);
-            (data.length != 0 && !isLoaded) ? setLoaded(true) : false;
+            setLoaded(true);
         });
     }
 
@@ -48,14 +50,14 @@ const SotaTable: React.FC<Partial<SotaTableProps<any>>> = (props) => {
         update();
         const interval = setInterval(() => {
             update();
-        }, props.refreshRate!*1000);
+        }, props.refreshRate! * 1000);
         return () => clearInterval(interval);
     }, [props.src]);
     /* eslint-enable */
 
     return (
         <Table dataSource={data} loading={!isLoaded} {...props.tableProps}>
-            { props.columns?.map(col => col) }
+            {props.columns?.map(col => col)}
         </Table>
     );
 
@@ -63,7 +65,8 @@ const SotaTable: React.FC<Partial<SotaTableProps<any>>> = (props) => {
 
 SotaTable.defaultProps = {
     columns: [],
-    refreshRate: 30
+    refreshRate: 60,
+    seamless: true
 };
 
 export { SotaTable };

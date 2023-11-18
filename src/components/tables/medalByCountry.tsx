@@ -8,6 +8,7 @@ import ReactCountryFlag from "react-country-flag";
 const opts: SotaTableProps<CountryEntry> = {
     src: "https://sota-backend.fly.dev/medals",
     dataProcess: (data): TableRow<CountryEntry>[] => {
+        if (Object.keys(data).length === 0) return [];
         const result: TableRow<CountryEntry>[] = [];
         for (const [country, medals] of Object.entries<MedalObject>(data)) {
             const total = medals.gold + medals.silver + medals.bronze;
@@ -64,17 +65,17 @@ const opts: SotaTableProps<CountryEntry> = {
         )} align="center" />),
         (<Table.Column key="gold" dataIndex="gold" title={
             <div className="flex w-full justify-center content-center">
-                <MedalIcon place={1} size={28} fill="#D6AF36"/>
+                <MedalIcon place={1} size={28} fill="#D6AF36" />
             </div>
         } align="center" />),
         (<Table.Column key="silver" dataIndex="silver" title={
             <div className="flex w-full justify-center content-center">
-                <MedalIcon place={2} size={28} fill="#A7A7AD"/>
+                <MedalIcon place={2} size={28} fill="#A7A7AD" />
             </div>
         } align="center" />),
         (<Table.Column key="bronze" dataIndex="bronze" title={
             <div className="flex w-full justify-center content-center">
-                <MedalIcon place={3} size={28} fill="#CC7B12"/>
+                <MedalIcon place={3} size={28} fill="#CC7B12" />
             </div>
         } align="center" />),
     ],
@@ -82,11 +83,11 @@ const opts: SotaTableProps<CountryEntry> = {
         size: "small",
         tableLayout: "fixed",
         pagination: {
-            position: [ "topRight" ]
+            position: ["topRight"]
         }
     }
 }
 
-const OverallMedalByCountry: React.FC = () => ( <SotaTable {...opts} /> );
+const OverallMedalByCountry: React.FC = () => (<SotaTable {...opts} />);
 
 export default OverallMedalByCountry;

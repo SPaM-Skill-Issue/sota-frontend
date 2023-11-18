@@ -6,6 +6,7 @@ import MedalIcon from "../medalIcon";
 
 const opts: Omit<SotaTableProps<SportEntry>, "src"> = {
     dataProcess: (data): TableRow<SportEntry>[] => {
+        if (Object.keys(data).length === 0) return [];
         const sports: SportEntry[] = data["individual_sports"];
         sports.forEach((s) => {
             s.sub_sports.sort((a, b) => {
@@ -17,11 +18,11 @@ const opts: Omit<SotaTableProps<SportEntry>, "src"> = {
                 if (a.silver! > b.silver!) return -1;
                 return a.sub_name!.localeCompare(b.sub_name!) * -1;
             }),
-            s.sub_sports.forEach((ss) => {
-                ss.key = `${s.sport_id} - ${ss.sub_name}`,
-                ss.name = ss.sub_name
-                ss.total = ss.gold + ss.silver + ss.bronze
-            });
+                s.sub_sports.forEach((ss) => {
+                    ss.key = `${s.sport_id} - ${ss.sub_name}`,
+                        ss.name = ss.sub_name
+                    ss.total = ss.gold + ss.silver + ss.bronze
+                });
         });
         sports.sort((a, b) => {
             if (a.total! < b.total!) return 1;
@@ -62,40 +63,41 @@ const opts: Omit<SotaTableProps<SportEntry>, "src"> = {
         } align="center" />),
         (<Table.Column key="gold" dataIndex="gold" title={
             <div className="flex w-full justify-center content-center">
-                <MedalIcon place={1} size={32} fill="#D6AF36"/>
+                <MedalIcon place={1} size={32} fill="#D6AF36" />
             </div>
         } align="center" />),
         (<Table.Column key="silver" dataIndex="silver" title={
             <div className="flex w-full justify-center content-center">
-                <MedalIcon place={2} size={32} fill="#A7A7AD"/>
+                <MedalIcon place={2} size={32} fill="#A7A7AD" />
             </div>
         } align="center" />),
         (<Table.Column key="bronze" dataIndex="bronze" title={
             <div className="flex w-full justify-center content-center">
-                <MedalIcon place={3} size={32} fill="#CC7B12"/>
+                <MedalIcon place={3} size={32} fill="#CC7B12" />
             </div>
         } align="center" />),
     ],
     tableProps: {
         tableLayout: "fixed",
         pagination: false
-    }
+    },
+    seamless: false,
 }
 
 interface Props {
     country: string;
 }
 
-const MedalForSingleCountry: React.FC<Props> = (props) => { 
+const MedalForSingleCountry: React.FC<Props> = (props) => {
 
-    const [ src, setSrc ] = useState<string>('');
-    const [ loaded, setLoaded ] = useState<boolean>(false);
+    const [src, setSrc] = useState<string>('');
+    const [loaded, setLoaded] = useState<boolean>(false);
 
     useEffect(() => {
         setLoaded(false);
         if (props.country == '') {
             setSrc('');
-            return () => {};
+            return () => { };
         }
         setSrc(`https://sota-backend.fly.dev/medal/c/${props.country}`);
         setLoaded(true);
