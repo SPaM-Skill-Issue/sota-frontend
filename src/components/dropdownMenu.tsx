@@ -8,12 +8,13 @@ interface DropdownMenuProps {
         key: string
     }[];
     handleSelect: (value:string) => void;
+    currentValue: string;
 }
 
-const DropdownMenu: React.FC<DropdownMenuProps> = ({ data, handleSelect }) => {
-
+const DropdownMenu: React.FC<DropdownMenuProps> = ({ data, handleSelect, currentValue }) => {
+    
     return (
-        <Select onSelect={handleSelect} className='w-1/3' >
+        <Select value={currentValue} onSelect={handleSelect} className='w-1/3'>
             {data.map(item => (
                 <Option key={item.key} value={item.key}>
                     {item.label}
