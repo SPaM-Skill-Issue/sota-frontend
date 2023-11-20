@@ -9,6 +9,7 @@ import { getCountryName } from "../../util/iso31661a2";
 const opts: SotaTableProps<CountryEntry> = {
     src: "https://sota-backend.fly.dev/medals",
     dataProcess: (data): TableRow<CountryEntry>[] => {
+        if (Object.keys(data).length === 0) return [];
         const result: TableRow<CountryEntry>[] = [];
         for (const [country, medals] of Object.entries<MedalObject>(data)) {
             const total = medals.gold + medals.silver + medals.bronze;
@@ -52,11 +53,11 @@ const opts: SotaTableProps<CountryEntry> = {
     },
     columns: [
         (<Table.Column key="rank" dataIndex="rank"
-        className="before:content-['#'] before:font-bold before:font-primary font-bold font-primary" width={60}/>),
+            className="before:content-['#'] before:font-bold before:font-primary font-bold font-primary" width={60} />),
         (<Table.Column key="country" dataIndex="country" render={(c: string) => (
             <Tooltip className="font-primary" title={getCountryName(c)} placement="left">
-            <ReactCountryFlag countryCode={c} svg style={{ marginRight: '1rem', width: '1.5rem', height: '1.5rem' }}/>
-            {getCountryName(c)}
+                <ReactCountryFlag countryCode={c} svg style={{ marginRight: '1rem', width: '1.5rem', height: '1.5rem' }} />
+                {getCountryName(c)}
             </Tooltip>
         )} ellipsis={true} className="font-primary font-bold" />),
         (<Table.Column key="total" dataIndex="total" render={(t: number) => (
@@ -66,17 +67,17 @@ const opts: SotaTableProps<CountryEntry> = {
         } align="center" />),
         (<Table.Column key="gold" dataIndex="gold" title={
             <div className="flex w-full justify-center content-center">
-                <MedalIcon place={1} size={32} fill="#D6AF36"/>
+                <MedalIcon place={1} size={32} fill="#D6AF36" />
             </div>
         } align="center" />),
         (<Table.Column key="silver" dataIndex="silver" title={
             <div className="flex w-full justify-center content-center">
-                <MedalIcon place={2} size={32} fill="#A7A7AD"/>
+                <MedalIcon place={2} size={32} fill="#A7A7AD" />
             </div>
         } align="center" />),
         (<Table.Column key="bronze" dataIndex="bronze" title={
             <div className="flex w-full justify-center content-center">
-                <MedalIcon place={3} size={32} fill="#CC7B12"/>
+                <MedalIcon place={3} size={32} fill="#CC7B12" />
             </div>
         } align="center" />),
     ],
@@ -87,6 +88,6 @@ const opts: SotaTableProps<CountryEntry> = {
     }
 };
 
-const OverallMedalByCountryHomePage: React.FC = () => ( <SotaTable {...opts} /> );
+const OverallMedalByCountryHomePage: React.FC = () => (<SotaTable {...opts} />);
 
 export default OverallMedalByCountryHomePage;
