@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Radio, RadioChangeEvent } from 'antd';
 import DropdownMenu from './dropdownMenu';
-import { getCountryName } from '../util/iso31661a2';
+import { _countries } from '../util/iso31661a2';
+import { _sports } from '../util/sportid';
 
 interface Entry {
     label: string;
@@ -13,46 +14,27 @@ interface sendData {
     catagoryHandle: (value: string) => void;
 }
 
+const formattedCountries: Entry[] = Object.entries(_countries).map(
+    ([key, label]) => ({
+      label,
+      key,
+    })
+);
+
+const formattedSports: Entry[] = Object.entries(_sports).map(
+    ([key, label]) => ({
+        label,
+        key,
+      })
+);
+
 const FilterSportCountry: React.FC<sendData> = (sendData) => {
     const [selectedCategory, setSelectedCategory] = useState<string>('sports'); // Set "sports" as default
     const [data, setData] = useState<Entry[]>([]); // Set "sportItems" as default
     const [dropdowndata, setDropDown] = useState<string>('');
 
-    const getCountryCode = async () => {
-        try {
-            const countryName = await fetch(`https://sota-backend.fly.dev/medals`);
-            const countryData = await countryName.json();
-            const countryKey = Object.keys(countryData)
-            countryKey.sort((a, b) => getCountryName(a) > getCountryName(b) ? 0 : -1);
-            setData(countryKey.map((c) => {return {
-                label: getCountryName(c), 
-                key: c
-            }}))
-        }
-        catch {
-            console.error("Error getting country code");
-        }
-    };
-
-    const getSportCode = async () => {
-        try {
-            const sportName = await fetch(`https://sota-backend.fly.dev/sports`);
-            const sportData = await sportName.json();
-            const sportList = [];
-            for (const [key, value] of Object.entries(sportData)) {
-                sportList.push({
-                    label: String(value),
-                    key: key
-                })
-              }
-            setData(sportList);
-        }
-        catch {
-            console.error("Error getting sport code");
-        }
-    }
     useEffect(() => {
-        getSportCode();
+        setData(formattedSports);
         setDropDown("1");
     }, []);
 
@@ -67,11 +49,11 @@ const FilterSportCountry: React.FC<sendData> = (sendData) => {
         const selectedValue = e.target.value;
         setSelectedCategory(selectedValue);
         if (selectedValue === 'sports') {
-            await getSportCode();
+            setData(formattedSports);
             setDropDown("1");
         } else {
-            await getCountryCode();
-            setDropDown("AR");
+            setData(formattedCountries);
+            setDropDown("AF");
         }
     };
 
