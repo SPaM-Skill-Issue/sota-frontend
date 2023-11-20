@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Radio, RadioChangeEvent } from 'antd';
 import DropdownMenu from './dropdownMenu';
-import { getCountryName } from '../util/iso31661a2';
 
 interface Entry {
     label: string;
