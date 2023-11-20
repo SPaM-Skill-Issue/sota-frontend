@@ -54,3 +54,4 @@ const getSportName = (id: SportID| string): string => {
 }
 
 export { getSportName };
+export {_sports };

@@ -260,3 +260,4 @@ const getCountryName = (code: CountryCode | string): string => {
 }
 
 export { getCountryName };
+export { _countries };
