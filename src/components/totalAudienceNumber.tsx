@@ -56,15 +56,15 @@ const TotalAudienceNumber = () => {
                     <Spin size="large" />
                 </div>) : (data ?
                     (<><div className="flex justify-center py-5">
-                        <span className=" text-hunyadi-yellow text-3xl">{data.total.toLocaleString()} <TeamOutlined /></span>
+                        <span data-testid="total" className=" text-hunyadi-yellow text-3xll">{data.total.toLocaleString()} <TeamOutlined /></span>
                     </div>
                         <div>
                             <div className="flex justify-center">
-                                <span className="text-white"><ManOutlined /> {data.man.toLocaleString()}</span>
-                                <span className="text-white ml-5"><WomanOutlined /> {data.woman.toLocaleString()}</span>
+                                <span data-testid="total-m" className="text-white"><ManOutlined /> {data.man.toLocaleString()}</span>
+                                <span data-testid="total-f" className="text-white ml-5"><WomanOutlined /> {data.woman.toLocaleString()}</span>
                             </div>
                             <div className="flex justify-center">
-                                <span className="text-white"><MinusCircleOutlined /> {data.noneDefine.toLocaleString()}</span>
+                                <span data-testid="total-n" className="text-white"><MinusCircleOutlined /> {data.noneDefine.toLocaleString()}</span>
                             </div>
                         </div></>) :
                     (<div className="flex items-center justify-center w-full h-[20vh]">
