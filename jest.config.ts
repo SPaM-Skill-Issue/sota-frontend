@@ -1,11 +1,13 @@
 export default {
     preset: 'ts-jest',
-    testEnvironment: 'jest-environment-jsdom',
+    setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+    testPathIgnorePatterns: ['<rootDir>/node_modules/'],
+    testEnvironment: 'jsdom',
     transform: {
         "^.+\\.tsx?$": "ts-jest" 
     // process `*.tsx` files with `ts-jest`
     },
     moduleNameMapper: {
-        '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/tests/mocks/fileMock.js',
+        '\\.(scss|sass|css)$': 'identity-obj-proxy',
     },
 }
