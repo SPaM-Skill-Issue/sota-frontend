@@ -21,8 +21,8 @@ describe('TotalAudienceNumber Component Tests', () => {
     });
 
     it ("should render TotalAudienceNumber component correctly", () => {
-        const TotalAudienceComponent = render(<TotalAudienceNumber />);
-        expect(TotalAudienceComponent).toMatchSnapshot();
+        const wrapper = render(<TotalAudienceNumber />);
+        expect(wrapper).toMatchSnapshot();
     });
 
     it ("should displays loading state initially", async () => {
