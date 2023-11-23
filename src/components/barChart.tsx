@@ -14,7 +14,7 @@ interface BarChartProps {
 
 const BarChart: React.FC<BarChartProps> = ({ topic, filter, fetch_data }) => {
 
-    const [isLoaded, setLoaded] = useState<boolean>(false);
+    const [isLoading, setLoading] = useState<boolean>(false);
     const [xFeild, setxField] = useState<string>('');
     const [data, setData] = useState<GenderValue[]>([]);
 
@@ -81,7 +81,9 @@ const BarChart: React.FC<BarChartProps> = ({ topic, filter, fetch_data }) => {
 
 
     useEffect(() => {
+        setLoading(true);
         countBy(fetch_data);
+        setLoading(false)
     }, [topic, filter, fetch_data]);
 
     const legendCfg: LegendCfg = {
@@ -123,7 +125,7 @@ const BarChart: React.FC<BarChartProps> = ({ topic, filter, fetch_data }) => {
         <div className="flex items-center justify-center w-full h-[75vh]">
             <span className='font-primary text-hunyadi-yellow text-3xl'>No DATA</span>
         </div>
-    ) : (isLoaded ? (
+    ) : (isLoading ? (
         <div className="flex items-center justify-center w-full h-[75vh]">
             <Spin size="large" />
         </div>

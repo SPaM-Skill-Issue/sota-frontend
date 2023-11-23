@@ -17,7 +17,7 @@ interface TotalAudienceProps {
 
 
 const TotalAudienceNumber: React.FC<TotalAudienceProps> = ({ fetch_data }) => {
-    const [isLoaded, setLoaded] = useState<boolean>(false);
+    const [isLoading, setLoading] = useState<boolean>(false);
     const [data, setData] = useState<TotalAudience>();
 
     function count_aud(list: AudienceInterface[]) {
@@ -37,14 +37,16 @@ const TotalAudienceNumber: React.FC<TotalAudienceProps> = ({ fetch_data }) => {
     }
 
     useEffect(() => {
+        setLoading(true);
         count_aud(fetch_data);
+        setLoading(false);
     },[fetch_data]);
 
     return (
         <div className=" bg-belft-blue rounded-2xl">
             <div className=" p-5">
                 <span className=" font-primary text-2xl text-white">Total Number of Audient</span>
-                {isLoaded ? 
+                {isLoading ? 
                 (<div className="flex items-center justify-center w-full h-[20vh]">
                     <Spin size="large" />
                 </div>) : (data ?
