@@ -12,7 +12,7 @@ interface topFiveSports {
     sportName: string;
     sportId: number;
     value: number;
-    sportIcon: any;
+    sportIcon: JSX.Element;
 }
 
 const MostInterestSports = () => {
