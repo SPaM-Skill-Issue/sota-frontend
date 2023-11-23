@@ -1,5 +1,5 @@
 import { ManOutlined, TeamOutlined, WomanOutlined, MinusCircleOutlined } from "@ant-design/icons";
-import { Audience} from '../interfaces/audienceBarChart';
+import { AudienceInterface} from '../interfaces/audienceBarChart';
 import { useState } from "react";
 import { useEffect } from "react";
 import { Spin } from "antd";
@@ -11,12 +11,16 @@ interface TotalAudience {
     noneDefine: number;
 }
 
+interface TotalAudienceProps {
+    fetch_data: AudienceInterface[];
+}
 
-const TotalAudienceNumber = () => {
+
+const TotalAudienceNumber: React.FC<TotalAudienceProps> = ({ fetch_data }) => {
     const [isLoaded, setLoaded] = useState<boolean>(false);
     const [data, setData] = useState<TotalAudience>();
 
-    function count_aud(list: Audience[]) {
+    function count_aud(list: AudienceInterface[]) {
         const result: TotalAudience = { total: 0, man: 0, woman: 0, noneDefine: 0 };
         list.forEach(element => {
             result.total += 1
@@ -36,9 +40,7 @@ const TotalAudienceNumber = () => {
         const fetchData = async () => {
             setLoaded(true);
             try {
-                const res_a = await fetch("https://sota-backend.fly.dev/audient")
-                const audience_json: Audience[] = await res_a.json();
-                count_aud(audience_json);
+                count_aud(fetch_data);
             } catch (error) {
                 console.error("Error fetching data: ", error);
             }

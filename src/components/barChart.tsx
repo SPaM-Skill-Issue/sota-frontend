@@ -1,7 +1,7 @@
 import { Column } from '@ant-design/plots';
 import { Spin } from 'antd';
 import { useEffect, useState } from 'react';
-import { Audience, GenderValue, ResultForCountry, ResultForSport } from '../interfaces/audienceBarChart';
+import { AudienceInterface, GenderValue, ResultForCountry, ResultForSport } from '../interfaces/audienceBarChart';
 import { getSportName } from '../util/sportid';
 import { getCountryName } from '../util/iso31661a2';
 import { LegendCfg } from '@antv/g2/lib/interface';
@@ -9,9 +9,10 @@ import { LegendCfg } from '@antv/g2/lib/interface';
 interface BarChartProps {
     topic: string;
     filter: string;
+    fetch_data: AudienceInterface[];
 }
 
-const BarChart: React.FC<BarChartProps> = ({ topic, filter }) => {
+const BarChart: React.FC<BarChartProps> = ({ topic, filter, fetch_data }) => {
 
     const [isLoaded, setLoaded] = useState<boolean>(false);
     const [xFeild, setxField] = useState<string>('');
@@ -29,7 +30,7 @@ const BarChart: React.FC<BarChartProps> = ({ topic, filter }) => {
         });
     }
 
-    function countBy(list: Audience[]) {
+    function countBy(list: AudienceInterface[]) {
         if (topic == "sports") {
             setxField("country")
             const result: ResultForSport[] = [];
@@ -83,9 +84,7 @@ const BarChart: React.FC<BarChartProps> = ({ topic, filter }) => {
         const fetchData = async () => {
             setLoaded(true);
             try {
-                const res_a = await fetch("https://sota-backend.fly.dev/audient");
-                const audience_json = await res_a.json();
-                countBy(audience_json);
+                countBy(fetch_data);
 
             } catch (error) {
                 console.error("Error fetching data: ", error);

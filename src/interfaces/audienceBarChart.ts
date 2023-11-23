@@ -1,4 +1,4 @@
-export interface Audience {
+export interface AudienceInterface {
     country_code: string;
     sport_id: number[];
     gender: string;
