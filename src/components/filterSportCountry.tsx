@@ -70,7 +70,7 @@ const FilterSportCountry: React.FC<sendData> = (sendData) => {
                 <Radio value="sports">Sports</Radio>
                 <Radio value="country">Country</Radio>
             </Radio.Group>
-            <DropdownMenu data={data} handleSelect={handleSelect} />
+            <DropdownMenu data={data} handleSelect={handleSelect} currentValue={dropdowndata}/>
         </div>
     );
 };
