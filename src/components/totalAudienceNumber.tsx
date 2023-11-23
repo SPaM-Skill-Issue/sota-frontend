@@ -56,7 +56,7 @@ const TotalAudienceNumber = () => {
                     <Spin size="large" />
                 </div>) : (data ?
                     (<><div className="flex justify-center py-5">
-                        <span data-testid="total" className=" text-hunyadi-yellow text-3xll">{data.total.toLocaleString()} <TeamOutlined /></span>
+                        <span data-testid="total" className=" text-hunyadi-yellow text-3xl">{data.total.toLocaleString()} <TeamOutlined /></span>
                     </div>
                         <div>
                             <div className="flex justify-center">
