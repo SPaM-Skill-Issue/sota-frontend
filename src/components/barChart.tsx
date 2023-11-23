@@ -81,19 +81,8 @@ const BarChart: React.FC<BarChartProps> = ({ topic, filter, fetch_data }) => {
 
 
     useEffect(() => {
-        const fetchData = async () => {
-            setLoaded(true);
-            try {
-                countBy(fetch_data);
-
-            } catch (error) {
-                console.error("Error fetching data: ", error);
-            } finally {
-                setLoaded(false);
-            }
-        };
-        fetchData();
-    }, [topic, filter]);
+        countBy(fetch_data);
+    }, [topic, filter, fetch_data]);
 
     const legendCfg: LegendCfg = {
         position: "bottom",

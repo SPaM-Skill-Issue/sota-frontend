@@ -17,16 +17,27 @@ const Audience = () => {
     const [ load, setLoading ] = useState(true);
     const [ data, setData ] = useState<AudienceInterface[]>([]);
 
-    const fetchData = async () => {
-        const res = await fetch(`https://sota-backend.fly.dev/audient`);
-        setData(await res.json());
+    function fetchData(){
+        setLoading(true)
+        try {
+            fetch(`https://sota-backend.fly.dev/audient`).then(res => {
+                res.json().then(data_json => setData(data_json))
+            });
+            console.log(data)
+        } catch (error) {
+            console.error("Error fetching data: ", error);
+        } finally {
+            setLoading(false);
+        }
     }
+
+    useEffect(() => {
+        fetchData();
+    }, [filterKey, filterCatagory]);
 
     useEffect(() => {
         const fetchMedal = async () => {
             try {
-                fetchData();
-
                 const audienceNew: AudienceAgeRange[] = [];
                 audienceNew.push({ type: "< 18", value: 0});
                 audienceNew.push({ type: "18-30", value: 0});
@@ -56,7 +67,8 @@ const Audience = () => {
             }
         };
         fetchMedal();
-    }, [filterKey, filterCatagory]);
+    }, [filterKey, filterCatagory, data]);
+
     return (
         <div>
             <div>

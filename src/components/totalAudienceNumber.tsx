@@ -37,17 +37,8 @@ const TotalAudienceNumber: React.FC<TotalAudienceProps> = ({ fetch_data }) => {
     }
 
     useEffect(() => {
-        const fetchData = async () => {
-            setLoaded(true);
-            try {
-                count_aud(fetch_data);
-            } catch (error) {
-                console.error("Error fetching data: ", error);
-            }
-        };
-        fetchData();
-        setLoaded(false);
-    },[]);
+        count_aud(fetch_data);
+    },[fetch_data]);
 
     return (
         <div className=" bg-belft-blue rounded-2xl">
