@@ -1,7 +1,7 @@
 import { Column } from '@ant-design/plots';
 import { Spin } from 'antd';
 import { useEffect, useState } from 'react';
-import { Audience, GenderValue, ResultForCountry, ResultForSport } from '../interfaces/audienceBarChart';
+import { AudienceInterface, GenderValue, ResultForCountry, ResultForSport } from '../interfaces/audienceBarChart';
 import { getSportName } from '../util/sportid';
 import { getCountryName } from '../util/iso31661a2';
 import { LegendCfg } from '@antv/g2/lib/interface';
@@ -9,11 +9,12 @@ import { LegendCfg } from '@antv/g2/lib/interface';
 interface BarChartProps {
     topic: string;
     filter: string;
+    fetch_data: AudienceInterface[];
 }
 
-const BarChart: React.FC<BarChartProps> = ({ topic, filter }) => {
+const BarChart: React.FC<BarChartProps> = ({ topic, filter, fetch_data }) => {
 
-    const [isLoaded, setLoaded] = useState<boolean>(false);
+    const [isLoading, setLoading] = useState<boolean>(false);
     const [xFeild, setxField] = useState<string>('');
     const [data, setData] = useState<GenderValue[]>([]);
 
@@ -29,7 +30,7 @@ const BarChart: React.FC<BarChartProps> = ({ topic, filter }) => {
         });
     }
 
-    function countBy(list: Audience[]) {
+    function countBy(list: AudienceInterface[]) {
         if (topic == "sports") {
             setxField("country")
             const result: ResultForSport[] = [];
@@ -80,21 +81,10 @@ const BarChart: React.FC<BarChartProps> = ({ topic, filter }) => {
 
 
     useEffect(() => {
-        const fetchData = async () => {
-            setLoaded(true);
-            try {
-                const res_a = await fetch("https://sota-backend.fly.dev/audient");
-                const audience_json = await res_a.json();
-                countBy(audience_json);
-
-            } catch (error) {
-                console.error("Error fetching data: ", error);
-            } finally {
-                setLoaded(false);
-            }
-        };
-        fetchData();
-    }, [topic, filter]);
+        setLoading(true);
+        countBy(fetch_data);
+        setLoading(false)
+    }, [topic, filter, fetch_data]);
 
     const legendCfg: LegendCfg = {
         position: "bottom",
@@ -135,7 +125,7 @@ const BarChart: React.FC<BarChartProps> = ({ topic, filter }) => {
         <div className="flex items-center justify-center w-full h-[75vh]">
             <span className='font-primary text-hunyadi-yellow text-3xl'>No DATA</span>
         </div>
-    ) : (isLoaded ? (
+    ) : (isLoading ? (
         <div className="flex items-center justify-center w-full h-[75vh]">
             <Spin size="large" />
         </div>

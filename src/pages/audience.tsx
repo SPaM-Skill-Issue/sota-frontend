@@ -8,19 +8,36 @@ import SportsIcons from "../components/sportsIcons";
 import { getSportName } from '../util/sportid';
 import { getCountryName } from '../util/iso31661a2';
 import { AudienceAgeRange } from "../interfaces/audiencePieChart";
+import { AudienceInterface } from "../interfaces/audienceBarChart";
 
 const Audience = () => {
     const [ filterKey, setFilterKey ] = useState<string>('');
     const [ filterCatagory, setCatagory] = useState<string>('');
     const [ audienceData, setAudience ] = useState<AudienceAgeRange[] | null>();
     const [ load, setLoading ] = useState(true);
+    const [ data, setData ] = useState<AudienceInterface[]>([]);
+
+    function fetchData(){
+        setLoading(true)
+        try {
+            fetch(`https://sota-backend.fly.dev/audient`).then(res => {
+                res.json().then(data_json => setData(data_json))
+            });
+            console.log(data)
+        } catch (error) {
+            console.error("Error fetching data: ", error);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        fetchData();
+    }, [filterKey, filterCatagory]);
 
     useEffect(() => {
         const fetchMedal = async () => {
             try {
-                const res = await fetch(`https://sota-backend.fly.dev/audient`);
-                const data = await res.json();
-
                 const audienceNew: AudienceAgeRange[] = [];
                 audienceNew.push({ type: "< 18", value: 0});
                 audienceNew.push({ type: "18-30", value: 0});
@@ -50,7 +67,8 @@ const Audience = () => {
             }
         };
         fetchMedal();
-    }, []);
+    }, [filterKey, filterCatagory, data]);
+
     return (
         <div>
             <div>
@@ -58,7 +76,7 @@ const Audience = () => {
             </div>
             <div className="flex pt-10">
                 <div className="w-1/3">
-                    <TotalAudienceNumber />
+                    <TotalAudienceNumber fetch_data={data} />
                     <div className="rounded-2xl bg-belft-blue mt-5">
                         <div className="p-5">
                             <span className="font-primary text-2xl text-white">Audience Age Chart</span>
@@ -100,7 +118,7 @@ const Audience = () => {
                         <div className='pt-5'>
                             <span className="font-primary text-white flex justify-center">Graph show numbers of people in {filterCatagory == "country" ? getCountryName(filterKey) :"each country" } that interested in {filterCatagory == "sports" ? getSportName(filterKey) :"each sports" }</span>
                             <div className=" pt-5">
-                                <BarChart topic={ filterCatagory } filter={ filterKey }/>
+                                <BarChart topic={ filterCatagory } filter={ filterKey } fetch_data={ data }/>
                             </div>
                         </div>
                     </div>

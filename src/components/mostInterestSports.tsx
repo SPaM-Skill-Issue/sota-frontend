@@ -2,7 +2,7 @@ import { ArrowRightOutlined } from "@ant-design/icons";
 import SportsIcons from "./sportsIcons";
 import SportCard from "./sportCard";
 import { getSportName } from '../util/sportid';
-import { Audience } from '../interfaces/audienceBarChart';
+import { AudienceInterface } from '../interfaces/audienceBarChart';
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -12,14 +12,14 @@ interface topFiveSports {
     sportName: string;
     sportId: number;
     value: number;
-    sportIcon: any;
+    sportIcon: JSX.Element;
 }
 
 const MostInterestSports = () => {
     const [isLoaded, setLoaded] = useState<boolean>(false);
     const [data, setData] = useState<topFiveSports[]>([]);
 
-    function count_interest_sport(list: Audience[]) {
+    function count_interest_sport(list: AudienceInterface[]) {
         const allSports: topFiveSports[] = []
         list.forEach(element => {
             element.sport_id.forEach(id => {
@@ -46,7 +46,7 @@ const MostInterestSports = () => {
             setLoaded(true);
             try {
                 const res_a = await fetch("https://sota-backend.fly.dev/audient")
-                const audience_json: Audience[] = await res_a.json();
+                const audience_json: AudienceInterface[] = await res_a.json();
                 count_interest_sport(audience_json);
             } catch (error) {
                 console.error("Error fetching data: ", error);
