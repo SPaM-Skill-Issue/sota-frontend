@@ -19,6 +19,10 @@ describe('MostInterestSports Component Tests', () => {
     afterEach(() => {
         jest.restoreAllMocks();
     });
+    it ("should renders correctly", () => {
+        const wrapper = render(<MostInterestSports />);
+        expect(wrapper).toMatchSnapshot();
+    });
 
     it ("should renders MostInterestSports component", async () => {
         render(
