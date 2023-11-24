@@ -11,12 +11,12 @@ const handleSelect = jest.fn();
 
 describe('DropdownMenu component', () => {
     it('should renders correctly', () => {
-        const wrapper = render(<DropdownMenu data={data} handleSelect={handleSelect} />);
+        const wrapper = render(<DropdownMenu data={data} handleSelect={handleSelect} currentValue={''} />);
         expect(wrapper).toMatchSnapshot();
     });
 
     it('should renders without errors', () => {
-        const { container } = render(<DropdownMenu data={data} handleSelect={handleSelect} />);
+        const { container } = render(<DropdownMenu data={data} handleSelect={handleSelect} currentValue={''} />);
         const selectElement = container.querySelector('.ant-select');
         expect(selectElement).toBeInTheDocument();
     });

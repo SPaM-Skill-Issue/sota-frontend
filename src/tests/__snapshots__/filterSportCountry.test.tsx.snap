@@ -9,7 +9,7 @@ exports[`FilterSportCountry component should renders correctly 1`] = `
         class="flex justify-center"
       >
         <div
-          class="text-2xl font-primary text-white mr-5 font-semi-bold"
+          class="text-2xl font-primary text-hunyadi-yellow mr-5"
         >
           Filter:
         </div>
@@ -83,8 +83,11 @@ exports[`FilterSportCountry component should renders correctly 1`] = `
               />
             </span>
             <span
-              class="ant-select-selection-placeholder"
-            />
+              class="ant-select-selection-item"
+              title="Archery"
+            >
+              Archery
+            </span>
           </div>
           <span
             aria-hidden="true"
@@ -121,7 +124,7 @@ exports[`FilterSportCountry component should renders correctly 1`] = `
       class="flex justify-center"
     >
       <div
-        class="text-2xl font-primary text-white mr-5 font-semi-bold"
+        class="text-2xl font-primary text-hunyadi-yellow mr-5"
       >
         Filter:
       </div>
@@ -195,8 +198,11 @@ exports[`FilterSportCountry component should renders correctly 1`] = `
             />
           </span>
           <span
-            class="ant-select-selection-placeholder"
-          />
+            class="ant-select-selection-item"
+            title="Archery"
+          >
+            Archery
+          </span>
         </div>
         <span
           aria-hidden="true"

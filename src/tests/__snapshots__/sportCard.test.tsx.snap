@@ -10,7 +10,7 @@ exports[`SportCard component should renders correctly 1`] = `
       >
         <div
           class="flex justify-center"
-          style="fill: #FF0000; width: 160px;"
+          style="fill: #FF0000; width: 160px; height: 160px;"
         >
           <svg
             viewBox="0 0 504 504"
@@ -33,7 +33,7 @@ exports[`SportCard component should renders correctly 1`] = `
     >
       <div
         class="flex justify-center"
-        style="fill: #FF0000; width: 160px;"
+        style="fill: #FF0000; width: 160px; height: 160px;"
       >
         <svg
           viewBox="0 0 504 504"

@@ -8,27 +8,15 @@ import {
 } from "./mocks/mockAudienceData";
 
 describe('TotalAudienceNumber Component Tests', () => {
-    beforeEach(() => {
-        global.fetch = jest.fn(() =>
-            Promise.resolve({
-                json: () => Promise.resolve(mockAudienceData),
-            })
-        ) as jest.Mock;
-    });
-
-    afterEach(() => {
-        jest.restoreAllMocks();
-    });
-
     it ("should render TotalAudienceNumber component correctly", () => {
-        const wrapper = render(<TotalAudienceNumber />);
+        const wrapper = render(<TotalAudienceNumber fetch_data={[]} />);
         expect(wrapper).toMatchSnapshot();
     });
 
     it ("should displays loading state initially", async () => {
-        render(<TotalAudienceNumber />);
+        render(<TotalAudienceNumber fetch_data={mockAudienceData} />);
         await waitFor(() => {
-            const element = screen.getByText(/Total Number of Audient/i);
+            const element = screen.getByText(/Total Number of Audience/i);
             expect(element).toBeInTheDocument();
         });
     });
@@ -36,7 +24,7 @@ describe('TotalAudienceNumber Component Tests', () => {
     it ("should display total audience number correctly", async () => {
         render(
             <MemoryRouter>
-                <TotalAudienceNumber />
+                <TotalAudienceNumber fetch_data={mockAudienceData} />
             </MemoryRouter>
         );
         await waitFor(() => {
@@ -49,7 +37,7 @@ describe('TotalAudienceNumber Component Tests', () => {
     it ("should display total male audience number correctly", async () => {
         render(
             <MemoryRouter>
-                <TotalAudienceNumber />
+                <TotalAudienceNumber fetch_data={mockAudienceData} />
             </MemoryRouter>
         );
         await waitFor(() => {
@@ -62,7 +50,7 @@ describe('TotalAudienceNumber Component Tests', () => {
     it ("should display total female audience number correctly", async () => {
         render(
             <MemoryRouter>
-                <TotalAudienceNumber />
+                <TotalAudienceNumber fetch_data={mockAudienceData} />
             </MemoryRouter>
         );
         await waitFor(() => {
@@ -75,7 +63,7 @@ describe('TotalAudienceNumber Component Tests', () => {
     it ("should display total not identify gender audience number correctly", async () => {
         render(
             <MemoryRouter>
-                <TotalAudienceNumber />
+                <TotalAudienceNumber fetch_data={mockAudienceData} />
             </MemoryRouter>
         );
         await waitFor(() => {
