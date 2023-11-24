@@ -46,22 +46,20 @@ const TotalAudienceNumber: React.FC<TotalAudienceProps> = ({ fetch_data }) => {
         <div className=" bg-belft-blue rounded-2xl">
             <div className=" p-5">
                 <span className=" font-primary text-2xl text-white">Total Number of Audience</span>
-                {isLoading ?
-                    (<div className="flex items-center justify-center w-full h-[20vh]">
-                        <Spin size="large" />
-                    </div>) : (data ?
-                        (<>
-                            <div className="flex justify-center py-5">
-                                <span title="Total audience" className=" text-hunyadi-yellow text-3xl">{data.total.toLocaleString()} <TeamOutlined /></span>
+                {isLoading ? 
+                (<div className="flex items-center justify-center w-full h-[20vh]">
+                    <Spin size="large" />
+                </div>) : (data ?
+                    (<><div className="flex justify-center py-5">
+                        <span data-testid="total" title="Total audience" className=" text-hunyadi-yellow text-3xl">{data.total.toLocaleString()} <TeamOutlined /></span>
+                    </div>
+                        <div>
+                            <div className="flex justify-center">
+                                <span data-testid="total-m" title="Men audience" className="text-white"><ManOutlined /> {data.man.toLocaleString()}</span>
+                                <span data-testid="total-f" title="Women audience" className="text-white ml-5"><WomanOutlined /> {data.woman.toLocaleString()}</span>
                             </div>
-                            <div>
-                                <div className="flex justify-center">
-                                    <span title="Men audience" className="text-white"><ManOutlined /> {data.man.toLocaleString()}</span>
-                                    <span title="Women audience" className="text-white ml-5"><WomanOutlined /> {data.woman.toLocaleString()}</span>
-                                </div>
-                                <div className="flex justify-center">
-                                    <span title="Non-defined audience" className="text-white"><MinusCircleOutlined /> {data.noneDefine.toLocaleString()}</span>
-                                </div>
+                            <div className="flex justify-center">
+                                <span data-testid="total-n" title="Non-defined audience" className="text-white"><MinusCircleOutlined /> {data.noneDefine.toLocaleString()}</span>
                             </div>
                         </>) :
                         (<div className="flex items-center justify-center w-full h-[20vh]">

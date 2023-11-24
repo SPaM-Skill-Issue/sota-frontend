@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MedalIcon component should renders correctly 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <svg
+        class=""
+        height="64"
+        version="1.1"
+        viewBox="0 0 1024 1024"
+        width="64"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M295.168 89.664a42.688 42.688 0 1 0-78.272 33.984l101.632 234.24a334.016 334.016 0 0 0-137.216 271.424c0 181.504 142.208 330.688 320 330.688h21.376c177.792 0 320-149.12 320-330.688a334.016 334.016 0 0 0-137.216-271.424l101.696-234.24a42.688 42.688 0 0 0-78.272-33.92L629.888 317.568a309.76 309.76 0 0 0-88.384-18.432l76.16-175.552a42.688 42.688 0 1 0-78.208-33.92L512 152.832 484.608 89.6a42.688 42.688 0 0 0-78.272 33.984l59.136 136.32-18.816 43.52c-18.112 3.2-35.648 7.936-52.544 14.144L295.168 89.664z m200.768 472.128a32 32 0 1 1-53.184-35.584V526.08l0.192-0.192 0.384-0.576 1.28-1.92a230.528 230.528 0 0 1 20.608-25.024c6.272-6.592 14.72-14.4 24.32-20.16 8.896-5.248 25.088-12.48 43.456-6.784 8.96 2.752 16.704 8.192 22.4 16.192 4.992 7.168 7.104 14.72 8.128 20.288 1.856 9.6 1.792 21.44 1.792 31.872v185.6h32a32 32 0 1 1 0 64h-128a32 32 0 0 1 0-64h32V554.368l-1.088 1.408a158.72 158.72 0 0 0-3.328 4.48l-0.96 1.472z"
+          fill="#FFF"
+        />
+      </svg>
+    </div>
+  </body>,
+  "container": <div>
+    <svg
+      class=""
+      height="64"
+      version="1.1"
+      viewBox="0 0 1024 1024"
+      width="64"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M295.168 89.664a42.688 42.688 0 1 0-78.272 33.984l101.632 234.24a334.016 334.016 0 0 0-137.216 271.424c0 181.504 142.208 330.688 320 330.688h21.376c177.792 0 320-149.12 320-330.688a334.016 334.016 0 0 0-137.216-271.424l101.696-234.24a42.688 42.688 0 0 0-78.272-33.92L629.888 317.568a309.76 309.76 0 0 0-88.384-18.432l76.16-175.552a42.688 42.688 0 1 0-78.208-33.92L512 152.832 484.608 89.6a42.688 42.688 0 0 0-78.272 33.984l59.136 136.32-18.816 43.52c-18.112 3.2-35.648 7.936-52.544 14.144L295.168 89.664z m200.768 472.128a32 32 0 1 1-53.184-35.584V526.08l0.192-0.192 0.384-0.576 1.28-1.92a230.528 230.528 0 0 1 20.608-25.024c6.272-6.592 14.72-14.4 24.32-20.16 8.896-5.248 25.088-12.48 43.456-6.784 8.96 2.752 16.704 8.192 22.4 16.192 4.992 7.168 7.104 14.72 8.128 20.288 1.856 9.6 1.792 21.44 1.792 31.872v185.6h32a32 32 0 1 1 0 64h-128a32 32 0 0 1 0-64h32V554.368l-1.088 1.408a158.72 158.72 0 0 0-3.328 4.48l-0.96 1.472z"
+        fill="#FFF"
+      />
+    </svg>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
