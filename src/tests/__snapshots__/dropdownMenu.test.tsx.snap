@@ -32,7 +32,8 @@ exports[`DropdownMenu component should renders correctly 1`] = `
             />
           </span>
           <span
-            class="ant-select-selection-placeholder"
+            class="ant-select-selection-item"
+            title=""
           />
         </div>
         <span
@@ -92,7 +93,8 @@ exports[`DropdownMenu component should renders correctly 1`] = `
           />
         </span>
         <span
-          class="ant-select-selection-placeholder"
+          class="ant-select-selection-item"
+          title=""
         />
       </div>
       <span

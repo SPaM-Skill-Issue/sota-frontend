@@ -83,8 +83,11 @@ exports[`FilterSportCountry component should renders correctly 1`] = `
               />
             </span>
             <span
-              class="ant-select-selection-placeholder"
-            />
+              class="ant-select-selection-item"
+              title="Archery"
+            >
+              Archery
+            </span>
           </div>
           <span
             aria-hidden="true"
@@ -195,8 +198,11 @@ exports[`FilterSportCountry component should renders correctly 1`] = `
             />
           </span>
           <span
-            class="ant-select-selection-placeholder"
-          />
+            class="ant-select-selection-item"
+            title="Archery"
+          >
+            Archery
+          </span>
         </div>
         <span
           aria-hidden="true"
