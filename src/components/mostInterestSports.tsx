@@ -65,7 +65,7 @@ const MostInterestSports = () => {
                     (<div className="flex items-center justify-center w-full h-[20vh]">
                         <Spin size="large" />
                     </div>) :
-                    (< div className="flex justify-evenly w-full py-8">
+                    (< div className="flex justify-evenly w-full py-5">
                         {data.map((sport, index) => (
                             <Link key={index} to={`/sports/${sport.sportId}`}>
                                 <SportCard key={index} sportName={sport.sportName} sportIcon={sport.sportIcon} color='#4C9F70' />
@@ -73,9 +73,9 @@ const MostInterestSports = () => {
                         ))
                         }
                     </div>)}
-        </div>
-            <div className="flex w-full justify-end pb-5 pr-5 text-white">
-                <a href="/audience">Overall audience page <ArrowRightOutlined /></a>
+                <div className="flex w-full justify-end pb-5 pr-5 text-white">
+                    <a href="/audience">Overall audience page <ArrowRightOutlined /></a>
+                </div>
             </div>
         </div >
     )
