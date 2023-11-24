@@ -1,5 +1,5 @@
 import { ManOutlined, TeamOutlined, WomanOutlined, MinusCircleOutlined } from "@ant-design/icons";
-import { AudienceInterface} from '../interfaces/audienceBarChart';
+import { AudienceInterface } from '../interfaces/audienceBarChart';
 import { useState } from "react";
 import { useEffect } from "react";
 import { Spin } from "antd";
@@ -40,33 +40,36 @@ const TotalAudienceNumber: React.FC<TotalAudienceProps> = ({ fetch_data }) => {
         setLoading(true);
         count_aud(fetch_data);
         setLoading(false);
-    },[fetch_data]);
+    }, [fetch_data]);
 
     return (
         <div className=" bg-belft-blue rounded-2xl">
             <div className=" p-5">
                 <span className=" font-primary text-2xl text-white">Total Number of Audience</span>
-                {isLoading ? 
-                (<div className="flex items-center justify-center w-full h-[20vh]">
-                    <Spin size="large" />
-                </div>) : (data ?
-                    (<><div className="flex justify-center py-5">
-                        <span data-testid="total" className=" text-hunyadi-yellow text-3xl">{data.total.toLocaleString()} <TeamOutlined /></span>
-                    </div>
-                        <div>
-                            <div className="flex justify-center">
-                                <span data-testid="total-m" className="text-white"><ManOutlined /> {data.man.toLocaleString()}</span>
-                                <span data-testid="total-f" className="text-white ml-5"><WomanOutlined /> {data.woman.toLocaleString()}</span>
-                            </div>
-                            <div className="flex justify-center">
-                                <span data-testid="total-n" className="text-white"><MinusCircleOutlined /> {data.noneDefine.toLocaleString()}</span>
-                            </div>
-                        </div></>) :
+                {isLoading ?
                     (<div className="flex items-center justify-center w-full h-[20vh]">
-                        <span className='font-primary text-hunyadi-yellow text-3xl'>No DATA</span>
-                    </div>))}
+                        <Spin size="large" />
+                    </div>) : (data ?
+                        (<>
+                            <div className="flex justify-center py-5">
+                                <span data-testid="total" title="Total audience" className=" text-hunyadi-yellow text-3xl">{data.total.toLocaleString()} <TeamOutlined /></span>
+                            </div>
+                            <div>
+                                <div className="flex justify-center">
+                                    <span data-testid="total-m" title="Men audience" className="text-white"><ManOutlined /> {data.man.toLocaleString()}</span>
+                                    <span data-testid="total-f" title="Women audience" className="text-white ml-5"><WomanOutlined /> {data.woman.toLocaleString()}</span>
+                                </div>
+                                <div className="flex justify-center">
+                                    <span data-testid="total-n" title="Non-defined audience" className="text-white"><MinusCircleOutlined /> {data.noneDefine.toLocaleString()}</span>
+                                </div>
+                            </div>
+                        </>) :
+                        (<div className="flex items-center justify-center w-full h-[20vh]">
+                            <span className='font-primary text-hunyadi-yellow text-3xl'>No DATA</span>
+                        </div>))}
             </div>
         </div>
+
     );
 }
 

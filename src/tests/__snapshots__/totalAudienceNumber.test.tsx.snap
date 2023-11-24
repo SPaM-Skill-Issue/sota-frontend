@@ -22,6 +22,7 @@ exports[`TotalAudienceNumber Component Tests should render TotalAudienceNumber c
             <span
               class=" text-hunyadi-yellow text-3xl"
               data-testid="total"
+              title="Total audience"
             >
               0
                
@@ -53,6 +54,7 @@ exports[`TotalAudienceNumber Component Tests should render TotalAudienceNumber c
               <span
                 class="text-white"
                 data-testid="total-m"
+                title="Men audience"
               >
                 <span
                   aria-label="man"
@@ -79,6 +81,7 @@ exports[`TotalAudienceNumber Component Tests should render TotalAudienceNumber c
               <span
                 class="text-white ml-5"
                 data-testid="total-f"
+                title="Women audience"
               >
                 <span
                   aria-label="woman"
@@ -109,6 +112,7 @@ exports[`TotalAudienceNumber Component Tests should render TotalAudienceNumber c
               <span
                 class="text-white"
                 data-testid="total-n"
+                title="Non-defined audience"
               >
                 <span
                   aria-label="minus-circle"
@@ -159,6 +163,7 @@ exports[`TotalAudienceNumber Component Tests should render TotalAudienceNumber c
           <span
             class=" text-hunyadi-yellow text-3xl"
             data-testid="total"
+            title="Total audience"
           >
             0
              
@@ -190,6 +195,7 @@ exports[`TotalAudienceNumber Component Tests should render TotalAudienceNumber c
             <span
               class="text-white"
               data-testid="total-m"
+              title="Men audience"
             >
               <span
                 aria-label="man"
@@ -216,6 +222,7 @@ exports[`TotalAudienceNumber Component Tests should render TotalAudienceNumber c
             <span
               class="text-white ml-5"
               data-testid="total-f"
+              title="Women audience"
             >
               <span
                 aria-label="woman"
@@ -246,6 +253,7 @@ exports[`TotalAudienceNumber Component Tests should render TotalAudienceNumber c
             <span
               class="text-white"
               data-testid="total-n"
+              title="Non-defined audience"
             >
               <span
                 aria-label="minus-circle"

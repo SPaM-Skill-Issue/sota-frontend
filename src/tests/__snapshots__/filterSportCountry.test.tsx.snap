@@ -9,7 +9,7 @@ exports[`FilterSportCountry component should renders correctly 1`] = `
         class="flex justify-center"
       >
         <div
-          class="text-2xl font-primary text-white mr-5 font-semi-bold"
+          class="text-2xl font-primary text-hunyadi-yellow mr-5"
         >
           Filter:
         </div>
@@ -124,7 +124,7 @@ exports[`FilterSportCountry component should renders correctly 1`] = `
       class="flex justify-center"
     >
       <div
-        class="text-2xl font-primary text-white mr-5 font-semi-bold"
+        class="text-2xl font-primary text-hunyadi-yellow mr-5"
       >
         Filter:
       </div>

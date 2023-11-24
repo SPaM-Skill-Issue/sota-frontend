@@ -65,7 +65,7 @@ const FilterSportCountry: React.FC<sendData> = (sendData) => {
 
     return (
         <div className='flex justify-center'>
-            <div className='text-2xl font-primary text-white mr-5 font-semi-bold'>Filter:</div>
+            <div className='text-2xl font-primary text-hunyadi-yellow mr-5'>Filter:</div>
             <Radio.Group onChange={handleCategoryChange} value={selectedCategory} className='font-primary'>
                 <Radio value="sports">Sports</Radio>
                 <Radio value="country">Country</Radio>

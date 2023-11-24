@@ -76,6 +76,7 @@ const Medal = () => {
     return  (
         <div className="flex">
             <div className="w-1/3 overflow-auto">
+                <span className="text-3xl text-shamrock-green font-primary">Overall Medal Count</span>
                 <ConfigProvider theme={{
                     components: {
                         Table: {
@@ -132,18 +133,19 @@ const Medal = () => {
                             </div> ) : 
                             ( medalData?.length != 0 ? (
                             <>
-                                <div className="w-1/3 bg-belft-blue rounded-2xl mt-3">
-                                    <div className="text-hunyadi-yellow text-2xl mt-7 font-primary justify-center"> Overall Medal </div>
+                                <div className="w-2/5 mt-3">
+                                    <div className="text-white text-xl mt-5 font-primary justify-center"> Overall Medal </div>
                                     <PieChartComponent data={medalData!} />
                                 </div>
-                                <div className="w-1/3 bg-belft-blue rounded-2xl mt-3">
-                                    <div className="text-hunyadi-yellow text-2xl mt-7 font-primary justify-center"> Medals from each {filterCatagory == 'sports' ? 'country' : 'sport'} </div>
+                                <div className="w-2/5 mt-3">
+                                    <div className="text-white text-xl mt-5 font-primary justify-center"> Medals from each {filterCatagory == 'sports' ? 'country' : 'sport'}</div>
                                     <PieChartComponent data={sportOrCountryData!} />
                                 </div>
                             </>
                         ) : (<div className=" text-hunyadi-yellow text-3xl font-primary mt-7 flex">No medal data</div>))}
                     </div>
-                    <div className="m-3">
+                    <div className="mx-3">
+                        <span className=" text-xl font-primary text-white">Table show medals from each {filterCatagory == 'sports' ? 'country' : 'sport'}</span>
                         <ConfigProvider theme={{
                             components: {
                                 Table: {
@@ -157,7 +159,7 @@ const Medal = () => {
                                 colorBgContainer: "#3E586C"
                             },
                         }}>
-                        <div>
+                        <div className="mt-3">
                             { filterCatagory == "country" &&
                                 <MedalForSingleCountry country={filterKey} />
                             }
